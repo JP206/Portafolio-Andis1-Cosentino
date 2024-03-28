@@ -1,0 +1,19 @@
+1. Persona analysis, porque está hecha para crear perfiles de usuarios ficticios. De esta manera conoces mejor a tu potencial cliente para adecuar así la aplicación
+
+2. Apprenticing, ya que al ponerse en el rol de usuario, uno comprende en profundidad el trabajo.
+
+3. Family Therapy, ya que se están enfrentando a desacuerdos, por lo que esto permitirá que comprendan la posición de los demás individuos.
+
+4. Brainstorming, ya que pone gran foco en lo creativo y facilitar la generación de ideas.
+
+5. Workshop, ya que se están realizando cambios en el sisito web y se enfoca en los stakeholders relevantes.
+
+6. Entrevistas, porque se puede ver de qué forma trabajan y se comunican en los diferentes departamentos. Además no se necesita de la presencialidad.
+
+7. Mind map, permite organizar la información de manera clara y así poder ver los resultados.
+
+8. Wikis, ya que usan plataformas en linea permitiendo la comunicación entre trabajadores.
+
+9. Prototipo low, ya que se quiere realizar una versión preliminar que se pueda modificar sin inconvenientes para buscar requerimientos.
+
+10. Document Archeology, porque consiste en analizar los documentos ya existentes para ver la evolución y áreas de mejora.
