@@ -1,0 +1,8 @@
+1. En realidad, sería: un BE puede generar varios BUC, y cada BUC tendrá uno o más PUC. 
+Ejemplo varios BUC: el caso de pedir comida en Mostaza que vimos en clase, el BE: hacer un pedido, se separa en el BUC1: hacer pedido en mostrador y BUC2: llega cadete de PedidosYa. PUC: el proceso de armado del pedido, que en este caso es el mismo.
+Ejemplo varios PUC: del proceso de armado de pedido se puede decidir automatizar el pedido en caja o el cocinado del pedido, son 2 PUC dentro del mismo BUC.
+
+2. Sí, por ejemplo: al respaldar la base de datos (BUC), se puede disparar una vez a la semana de manera programada (BE1) o manualmente (BE2).
+
+3. Llamar a la aseguradora, Se asigna el agente, Llega el agente y toma datos y testimonios, saca fotos, armar croquis, habla con testigos. Luego desde la seguradora se analiza la información recogida y se ve quién tiene la razón.
+Solución: que el proceso de recolección de datos pueda ser hecho por los involucrados en caso de tratarse de choques sin heridos, donde los involucrados no creen necesario un intermediario.

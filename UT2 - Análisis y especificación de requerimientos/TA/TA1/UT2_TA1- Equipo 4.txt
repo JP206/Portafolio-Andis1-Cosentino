@@ -1,0 +1,111 @@
+PARTE 1
+R002
+Recompensa: 3
+Le aporta valor al usuario, y la visibilidad de los restaurantes
+
+Penalización: 2
+El cliente no siempre pide al más cercano, sino a su preferido
+
+Costo: 4
+La implementación involucra el cálculo de distancias, filtros y localización, por lo que no es simple de implementar.
+
+R003
+Recompensa: 5
+Es esencial acceder al menú al tratarse de una empresa de delivery de comida, sino no cumple su funcionalidad.
+
+Penalización: 5
+Sin menú, no sirve la aplicación.
+
+Costo: 3
+Es cada restaurante que ingresa su menú, pero involucra procesaro todo el menú que tiene el restaurante.
+
+R004
+Recompensa: 4
+Ya que es esencial que el cliente pueda pedir varias cosas para facilitar su UX, asi no debe realizar pedidos de a uno.
+
+Penalización: 5
+Si el usuario no tiene esta funcionalidad, va a elegir otra aplicación.
+
+Costo: 1
+Es fácil de implementar.
+
+005
+Recompensa: 5
+Agiliza la transacción, además de ser lo usual en la actualidad, por lo que el cliente está habituado.
+
+Penalización: 3
+Es una comodidad que podría contrubuir a pedir en otro lado, pero si no es posible, hay clientes que igual van a pagar en efectivo.
+
+Costo: 1
+Ya que son características que ya están implementadas en distintos sistemas.
+
+006
+Recompensa: 2
+Es una funcionalidad muy específica, que le podría llegar a agregar valor a pedidos para eventos (por ejemplo), pero no para un cliente estándar.
+
+Penalización: 1
+No tener esta funcionalidad, no cambia el valor del producto.
+
+Costo: 2
+No requiere adicional, pero requiere disponibilidad de cadetes a las horas estipuladas.
+
+007
+Recompensa: 2
+No es necesario, aunque podría llegar a agregar valor al saber cuándo sale tu pedido sin necesidad de estar pendiente a que llegue el cadete.
+
+Penalización: 2
+Si le avisa al cliente cuándo llegará el pedido, puede que termine siendo más ágil, por lo que habría menos demoras. Pero tampoco es necesaria su implementación.
+
+Costo: 4
+Tiene complejidad logística a nivel de restaurante, aplicación, es necesario tener vigilados los cadetes con rastreador, localizador en vivo, etc. 
+
+008
+Recompensa: 5
+Ayuda al usuario a elegir restaurantes, también puede expresarse y permite al usuario sentirse parte.
+
+Penalización: 4
+Es un buen diferencial que generará engagement con el usuario y podrá hacer que el cliente elija esta app sobre otras, pero no afecta su correcto funcionamiento el no contar con esta funcionalidad.
+
+Costo: 2
+
+
+009
+Recompensa: 3
+Penalización: 2
+Costo: 2
+
+010
+Recompensa: 3
+Penalización: 1
+Costo: 5
+
+011
+Recompensa: 2
+Penalización: 2
+Costo: 4
+
+012
+Recompensa: 3
+Penalización: 3
+Costo: 1
+
+013
+Recompensa: 2
+Penalización: 3
+Costo: 3
+
+014
+Recompensa: 4
+Penalización: 3
+Costo: 2
+
+015
+Recompensa: 3
+Penalización: 2
+Costo: 5
+
+
+PARTE 2
+Al tratarse de muchos requisitos, se nos ocurrió la formula: (recompensa+penalización)/costo
+Ya que la recompensa en fundamental para el usuario, mientras que sin tener los esencial (que detectamos a través de su nivel de penalización), la app no funcionaría como se desea. Por otro lado, es costo es esencial para cualquier organización.
+

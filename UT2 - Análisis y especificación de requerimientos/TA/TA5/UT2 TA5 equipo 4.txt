@@ -1,0 +1,15 @@
+Nombre BE: cliente quiere pedir y recibir productos a domicilio
+Nombre y N° BUC: cliente quiere realizar pedido
+Trigger: cliente ordena productos a través de la aplicación
+Precondiciones: el cliente está registrado en la aplicación
+Interesados: cliente, tienda
+Interesados activos: cliente, tienda
+Pasos del caso normal:
+	1- el cliente se comunica con la tienda de comestibles y pide productos
+	2- la tienda procesa el pedido y lo cobra
+	3- la tienda prepara el pedido y lo envía al cliente
+Alternativas:
+	2A- la tienda cobra al entregar el pedido
+Excepciones:
+	2A- se rechaza la forma de pago y se busca otra
+Resultado: el cliente recibe su pedido

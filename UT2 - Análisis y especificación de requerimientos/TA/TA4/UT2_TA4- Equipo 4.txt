@@ -1,0 +1,13 @@
+1. Es un sistema activo, ya que el sistema "contaduría" se trata de un sector de trabajadores (humanos) dentro de la empresa que interactúan con el sistema.
+Se convierte en autónomo si, por ejemplo, quienes se encargan de pagar los sueldos es externo a la empresa y los trabajadores lo reciben de manera pasiva.
+Se convierte en cooperativo si es un sistema que está automatizado, es decir, cada 15 días se le paga a los trabajadores como parte del proceso.
+
+2. Es un sistema activo, ya que cada 10.000 kms el encargado (humano), debe encargarse de ingresar el camión al taller y pedir otro. 
+Se convierte en autónomo si, por ejemplo, se lleve cuenta en tiempo real del kilometraje y sin interacción se le notifique al encargado. 
+Se convierte en cooperativo si una vez pasados 10.000 kms se le asigna automáticamente un camión sin necesidad de pedirlo.
+
+3. Es un sistema activo, ya que un vecino (humano) llama a un funcionario de la intendencia para avisar que envíe el camión.
+Se convierte en autónomo si no es un vecino quien llame, sino que, por ejemplo, pase cada 3 días.
+Se convierte en cooperativo si, por ejemplo, existe un mecanismo a través del cual la intendencia sabe dónde recolectar la basura cada día.
+
+4. 
