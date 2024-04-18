@@ -1,5 +1,6 @@
+PROBLEMA 1
 Nombre BE: cliente quiere pedir y recibir productos a domicilio
-Nombre y N° BUC: cliente quiere realizar pedido
+Nombre y N° BUC: cliente quiere realizar pedido - N°1
 Trigger: cliente ordena productos a través de la aplicación
 Precondiciones: el cliente está registrado en la aplicación
 Interesados: cliente, tienda
@@ -11,5 +12,146 @@ Pasos del caso normal:
 Alternativas:
 	2A- la tienda cobra al entregar el pedido
 Excepciones:
-	2A- se rechaza la forma de pago y se busca otra
+	2E- se rechaza la forma de pago y se busca otra
 Resultado: el cliente recibe su pedido
+
+
+PROBLEMA 2
+Nombre BE: persona quiere llevarse un libro
+Nombre y N° BUC: préstamo y devolución de un libro  - N°2
+Trigger: socio escanea el libro
+Precondiciones: cuenta con tarjeta de socio activa
+Interesados: bibliotecario, dueños de la biblioteca, socio
+Interesados activos: socio
+Pasos del caso normal:
+	1- el cliente decide tomar prestado un libro
+	2- se acerca al mostrador y escanea el libro
+	3- se procesa el préstamo
+	4- se marca en la cuenta del socio que tiene un libro prestado
+Alternativas:
+	1A- el cliente decide devolver un libro
+	3A- se procesa la devolución
+	4A- se marca en la cuenta del socio que devolvió un libro
+Excepciones:
+	3E- el código del libro no funciona y es necesaria intervención del bibliotecario
+Resultado: el cliente retira un libro o lo devuelve
+
+
+PROBLEMA 3
+Nombre BE: facilitar el proceso de reservar y recoger un automóvil
+Nombre y N° BUC: reserva y recogida de automóvil - N°3
+Trigger: cliente toca el botón de "reservar"
+Precondiciones: el cliente tiene cuenta en la aplicación
+Interesados: empresa, cliente
+Interesados activos: empresa
+Pasos del caso normal:
+	1- el cliente elige un automóvil
+	2- se procesa la reserva
+	3- el cliente efectúa el pago
+	4- el cliente retira el automóvil
+Alternativas:
+	1A- el cliente elige varios automóviles
+	3A- el cliente paga al momento de retirar
+Excepciones:
+	3E- el pago es rechazado y debe de hacerse de otra manera
+	4E- el automóvil no funciona correctamente y se reclama
+Resultado: el cliente retira un automóvil
+
+
+PROBLEMA 4
+Nombre BE: persona quiere pedir comida a domicilio o para llevar
+Nombre y N° BUC: pedido en línea de comida a domicilio o para llevar - N°4
+Trigger: cliente hace click en "confirmar pedido"
+Precondiciones: cliente tiene cuenta en el sistema
+Interesados: dueños del restaurante, repartidores, empleados (cocineros, cajeros, etc), clientes
+Interesados activos: repartidores, cocineros, cajeros, cliente
+Pasos del caso normal:
+	1- cliente elige la comida y la suma al pedido
+	2- elige forma de recibir la comida
+	3- elige método de pago
+	4- restaurante realiza el pedido
+	5- se le entrega el pedido al cliente
+Alternativas:
+	5A- el cliente retira la comida
+Excepciones:
+	2E- el restaurante no llega a repartir en la zona del cliente, se cancela el pedido y se comunica al cliente
+Resultado: el cliente tiene su comida de la forma preferida, y el local cobró la transacción
+
+
+PROBLEMA 5
+Nombre BE: clínica médica quiere agendar citas y permitir el acceso a historial médico en portal
+Nombre y N° BUC: agenda y acceso a historial médico en clínica - N°5
+Trigger: el cliente presiona el botón "agendar"
+Precondiciones: el cliente está ingresado al sistema
+Interesados: clínica médica, pacientes (clientes)
+Interesados activos: clínica médica
+Pasos del caso normal:
+	1- el cliente inicia sesión en el portal y tiene acceso a su historial médico
+	2- el cliente elige un día y hora con disponibilidad horaria
+	3- se procesa la solicitud del cliente
+	4- se confirma al cliente si se pudo agendar
+Alternativas:
+	4A- el cliente cancela la consulta, por lo que vuelve a quedar disponible el día y hora para otro cliente
+Excepciones:
+	1E- el cliente olvida su contraseña al tratarse de una compleja que respeta las reglas de seguridad del OWASP Top 10:
+	el cliente recibe un SMS al celular ingresado en sus datos personales con una contraseña provisoria para acceder
+Resultado: el cliente puede agendarse en línea y acceder a su historial médico a cualquier hora y lugar
+
+
+PROBLEMA 6
+Nombre BE: usuario quiere reservar servicio de viaje
+Nombre y N° BUC: reserva de servicio de viaje via web - N°6
+Trigger: usuario ingresa a web a buscar vuelos/hoteles
+Precondiciones: el cliente tiene una cuenta y un medio de pago asociado
+Interesados: dueño de agencia (vendedor), empleados, clientes, aerolíneas, hoteles, ministerios de turismo
+Interesados activos: dueño de agencia
+Pasos del caso normal:
+	1- cliente abre la web del agente de viajes
+	2- busca paquete o servicio a contratar en la tienda
+	3- elige la cantidad de personas
+	4- elige método de pago
+	5- la agencia procesa la compra
+	6- cliente recibe via mail los tickets y comprobantes
+Alternativas:
+	4A- el cliente no compra el paquete, sino que lo deja en el carrito
+Excepciones:
+	5E- se rechaza el pago, el cliente debe hacerlo de nuevo
+Resultado: el cliente tiene su paquete reservado y con toda la información en su mail. La agencia tiene el dinero de la compra
+
+
+PROBLEMA 7
+Nombre BE: rastreo de paquete
+Nombre y N° BUC: rastreo de paquete - N°7
+Trigger: cliente toca el botón de "rastrear"
+Precondiciones: cliente tiene un código de seguimiento del paquete
+Interesados: empresa, cliente, personal, desarrolladores
+Interesados activos: empresa, desarrolladores
+Pasos del caso normal:
+	1- cliente ingresa al sistema
+	2- ingresa el código de seguimiento del paquete en el rastreador
+	3- se procesa el código
+	4- se presenta la información de estado y ubicación del paquete
+Alternativas:
+	3A- el código no es válido
+	4A- se le informa al cliente de la invalidez
+Excepciones:
+	4E- se extravió el paquete
+Resultado: el cliente sabe el estado y ubicación del paquete
+
+
+PROBLEMA 8
+Nombre BE: institución implementa un sistema de gestión del aprendizaje (LMS)
+Nombre y N° BUC: implementación de sistema de gestión del aprendizaje - N°8
+Trigger: institución contrata el sistema LMS
+Precondiciones: la institución cuenta con la infraestructura para implementarlo
+Interesados: institución, empresa que vende el LMS
+Interesados activos: empresa que vende el LMS
+Pasos del caso normal:
+	1- los directores de la institución deciden implementar un LMS
+	2- se estudian las posibilidades
+	3- se contrata una empresa para implementarlo
+	4- reciben capacitación de la empresa
+Alternativas:
+Excepciones:
+	2E- se contrata personal para implementarlo a cuenta de la institución porque las posiblidades no son buenas
+Resultado: la institución tiene su sistema LMS funcionando

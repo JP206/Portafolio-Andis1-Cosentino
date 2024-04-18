@@ -1,0 +1,76 @@
+UT2 TA8 Equipo 4
+Ejercicio 1 y 2
+1: funcional
+El software debe permitir crear perfiles únicos que incluyan mail, nombre de usuario y contraseña.
+
+2: funcional
+El software debe permitir reservar citas a una hora específica sin que coincidan diferentes usuarios.
+
+3: funcional
+El usuario debe poder visualizar la ficha técnica del vehículo desde su dispositivo en formato PDF.
+
+4: funcional
+El usuario debe visualizar notificaciones tres días de su servicio agendado, tanto por mail como por
+notificación push en el celular.
+Gold plating: que haga una animación con IA de un personaje famoso para cada notificación.
+Requirements creep: que envíe notificaciones por WhatsApp además de las notificaciones 
+existentes.
+
+5: funcional
+El software debe generar el informe cuando es solicitado por un usuario, que incluya la cantidad de 
+servicios hechos en un mes y las ganancias, junto con el encargado del servicio.
+
+6: no funcional de rendimiento
+El sistema debe estar caído a lo sumo dos horas al año.
+Gold plating: cuando el sistema está caído, que notifique a todos los usuarios cada 5 minutos el
+estado del sistema.
+Requirements creep: cuando esté levantado el servidor, que mande un mail personalizado a cada
+usuario notificando que está activo nuevamente.
+
+7: no funcional de mantenimiento
+Se debe poder seguir usando el sistema mientras se actualiza.
+
+8: no funcional de usabilidad
+Debe cumplir con los estándares de WCAG
+
+9: no funcional de look and feel
+Que se maneje la misma paleta de color de la organización y que no se utilicen más de tres 
+tipografías.
+Gold plating: según el tipo de usuario, que aparezcan animaciones 3D que cambien al tiempo
+meteorológico donde se encuentra el usuario.
+Requirements creep: además de coherente y consistente sea segura y veloz.
+
+10: no funcional de rendimiento
+Debe demorar a lo sumo dos segundos en cargar.
+
+11: no funcional de mantenimiento y soporte
+Que haya disponibilidad de lunes a viernes de 8:00 a 18:00 que asegure una resolución en a lo sumo
+48 horas.
+
+13: no funcional de operacional y ambiental
+Que no sea necesario cambiar más del 20% del código para implementar la funcionalidad, siguiendo
+los principios GRASP y SOLID.
+
+14: no funcional de operacional y ambiente
+El sistema a integrar debe contar con documentación y soporte.
+Gold plating: que el sistema envíe un mail avisando que se integró un sistema nuevo.
+Requirements creep: debe permitir el ingreso con cuenta de Google y Facebook.
+
+15: no funcional de seguridad
+El sistema debe cumplir con el Top 10 de OWASP.
+
+16: no funcional legal
+Debe cumplir con las leyes de seguridad en cada región.
+
+17: no funcional de seguridad
+El sistema debe cumplir con el Top 10 de OWASP.
+
+18: no funcional de usabilidad
+Comenzar el proceso de desinstalación no puede llevar más de dos minutos.
+
+19: no funcional de mantenimiento y soporte
+Respaldo encriptado automático cada 7 días, tanto local como en la nube del sistema operativo de 
+cada dispositivo (asegurandco seguridad y confiabilidad)
+
+20: no funcional legal
+Debe cumplor con las leyes de propiedad intelectual en cada región.

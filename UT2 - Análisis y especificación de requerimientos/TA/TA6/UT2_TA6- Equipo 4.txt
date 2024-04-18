@@ -1,0 +1,47 @@
+EJERCICIO 1
+1. Es ambiguo, no se aclara qué son los módulos en línea. Además, consideramos que para cada módulo en línea debería haber un requerimiento diferente.
+-El sistema debe ingresar a los pacientes en el sistema
+-El sistema debe registrar a los proveedores.
+-El sistema debe registrar la mercancía
+-El sistema debe registrar el stock
+-El sistema debe asegurarse que los papeles estén al día.
+
+2. No es un requerimiento, utiliza "puede ser", por lo que no es claro y concreto: El sistema debe enviar de forma automática las cartas de entrega de órdenes directamente al almacén.
+
+3. A pesar de estar bien limitado, no se aclara a dónde se enviará el correo electrónico, recurre a la generalidad, no utiliza un verbo modal. Además, incluye varias acciones. 
+-El sistema debe enviar un correo electrónico al cliente cuando se registre un pedido de venta de cliente
+-El sistema debe enviar un correo electrónico al cliente cuando se registre un despacho de mercancía al cliente
+-El sistema debe enviar un correo electrónico al cliente cuando se registre una emisión de factura a cliente
+-El sistema debe enviar un correo electrónico al cliente cuando se registre un registro de pago de cliente
+
+4. Es ambiguo: La contabilización de transacciones de facturas de compra y venta deberá configurarse para realizarse de forma automatizada. 
+
+EJERCICIO 2
+1. Eventos
+Registro
+Logueo
+Acceso al catálogo
+Recibir anuncio
+Gestionar cuentas
+Interactuar con la comunidad
+
+2. PUC
+El usuario se registra
+El usuario se loguea
+El usuario quiere reservar libros, periódicos, materiales audiovisuales u otros
+El usuario quiere devolver libros, periódicos, materiales audiovisuales u otros
+El usuario quiere renovar libros, periódicos, materiales audiovisuales u otros
+El usuario quiere proveer un feedback de libros, periódicos, materiales audiovisuales u otros
+El usuario quiere recibir anuncios de difusiones públicas 
+El usuario quiere recibir anuncios de recordatorios de vencimientos de plazo
+El usuario interactúa con la comunidad
+
+3. Requerimientos funcionales
+El sistema debe solicitar los siguientes datos a la hora de registrar un usuario: Nombre, apellido, edad, domicilio, CI y foto de identificación 
+El sistema debe contar con 3 roles para usuarios: bibliotecarios, lectores y proveedores
+El sistema debe permitir al usuario reservar libros, periódicos, materiales audiovisuales u otros
+El sistema debe permitir al usuario devolver libros, periódicos, materiales audiovisuales u otros
+El sistema debe permitir al usuario renovar libros, periódicos, materiales audiovisuales u otros
+El sistema debe permitir al usuario proveer un feedback de libros, periódicos, materiales audiovisuales u otros
+El sistema debe enviar anuncios de difusiones públicas
+El sistema debe enviar anuncios de recordatorio de vencimietos de plazo

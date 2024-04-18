@@ -1,0 +1,20 @@
+TA7 Equipo 4
+Ejercicio 1
+1) Ambiental
+2) Mantenimiento
+3) Legal
+4) Cultural
+5) Seguridad
+6) Apariencia y sensación
+7) Seguridad
+8) Rendimiento
+9) Accesibilidad
+
+Ejercicio 2
+-el uso de paleta de colores blanco y azul: apariencia y sensación
+-estilo minimalista: apariencia y sensación
+-el login debe durar menos de 5 segundos: rendimiento. Está relacionado al requisito funcional
+de login
+-catálogo encriptado a nivel de base de datos: seguridad. Está relacionado al requisito funcional
+de catálogo
+-los servidores estarán en datacenters con una temperatura de 5°C: ambiental
