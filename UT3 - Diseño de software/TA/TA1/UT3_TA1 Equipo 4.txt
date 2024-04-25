@@ -1,0 +1,17 @@
+Sistema operativo: SISTEMA tiene un conjunto de responsabilidades y objetivos.
+Navegador web: SISTEMA tiene un conjunto de responsabilidades y objetivos.
+Microservicio de pago: SUBSISTEMA, es parte de un sistema mayor
+Compilador: COMPONENTE, pieza con un rol definido, puediendo ser reemplazado
+Biblioteca de criptografía: MÓDULO, definido a nivel de lenguaje de programación
+Controlador de dispositivo: COMPONENTE, puede ser reemplazado, con rol claro
+Servidor web: SUBSISTEMA, parte de un sistema más grande
+Bases de datos SQL: SISTEMA, software que tiene un conjunto de responsabilidades y objetivos.
+Middleware: COMPONENTE, pieza de software con rol claro
+ORM: MÓDULO, definido a nivel de lenguaje de programación y puede ser importado
+IDE: SISTEMA, software con conjunto de responsabilidades y objetivos
+Motor de renderizado: SUBSISTEMA, parte de un navegador o motor
+Porcesador de texto: SISTEMA, tiene un conjunto de responsabilidades y objetivos
+Gestor de notificaciones: MÓDULO, definido a nivel de programación y puede ser importado.
+Gestro de ventanas: SUBSISTEMA, parte de sistema operativo o entorno
+
+

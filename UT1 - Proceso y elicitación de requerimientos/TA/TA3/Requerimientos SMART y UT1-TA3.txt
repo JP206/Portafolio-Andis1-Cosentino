@@ -1,0 +1,38 @@
+REQUERIMIENTOS: 
+SMART
+Specific: concreto y bien definido.
+Measurable: indicadores cuantificables para medir y evaluar el progreso.
+Achievable: realista, tener en cuenta limitaciones y recursos.
+Relevant: alineado con otras metas y el conjunto del negocio.
+Timebounded: con límite de tiempo.
+#Traceable: llevar registro de dónde surge y cómo muta a lo largo del tiempo.
+
+Requisito 1: El software debe ser fácil de usar.
+	No es medible, "fácil" no está bien definido.
+ 
+Requisito 2: El software debe tener una velocidad de carga inferior a 5 segundos. 
+	Depende del contexto si es relevante y realista que la velocidad de carga sea inferior a 5 segundos. En caso de serlo, es un requerimiento cuantificable y específico, por lo que sería SMART.
+
+Requisito 3: El software debe ser compatible con todos los navegadores web. 
+	No es específico, ya que no aclara a qué refiere con "todos" los navegadores web.
+
+Requisito 4: El software debe permitir a los usuarios exportar datos en formato CSV. 
+	Depende del contexto si es o no SMART, ya que no se aclara el tipo de datos a exportar.
+	
+Requisito 5: El software debe ser capaz de manejar grandes volúmenes de datos. 
+	No es medible, ya que no aclara a qué refiere con "grandes volúmenes" de datos.
+
+Requisito 6: El software debe ser seguro y proteger la información del usuario. 
+	No es medible, ya que no aclara a qué refiere con "seguro".
+
+Requisito 7: El software debe ser compatible con los sistemas operativos Windows y Mac. 
+	Sí, es concreto y medible, y se asume que es realista, relevante y con límite de tiempo, por lo que es SMART.
+
+Requisito 8: El software debe tener una tasa de error inferior al 1%. 
+	La tasa de error depende del contexto y del desarrollador a cargo del testeo, por lo que no es realista ni medible exigir una tasa de error inferior al 1%.
+
+Requisito 9: El software debe permitir la personalización de la interfaz de usuario. 
+	No es concreto, ya que no se especifica a qué se refiere con personalizar.
+
+Requisito 10: El software debe ser capaz de procesar transacciones financieras de forma segura según las normas ISO 2700, 27001, 27002 y 27004. 
+	Sí, es SMART, ya que es concreto y medible al basarse en las normas especificadas, además se asume que es realista, relevante y con límite de tiempo.

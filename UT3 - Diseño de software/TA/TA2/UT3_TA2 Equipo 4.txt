@@ -1,0 +1,42 @@
+PARTE 1
+a.
+Módulo de búsqueda y catálogo de productos
+-mostrarle al usuario todos los productos
+-permitirle al usuario buscar productos en particular
+
+Módulo de carrito y pago
+-persistir los productos que el usuario quiere comprar
+-realizar el pago
+
+Módulo de historial de pedidos y perfil del usuario
+-persisitir y mostrarle al usuario todo lo que compró hasta ahora
+-persistir y mostrar los datos ingresados en su perfil
+
+
+b.
+Descubrimiento: le salió un anuncio de la aplicación, le fue recomendada o lo busco en Google
+ 	|
+	v
+Consideración: utilizó el buscador para encontrar los precios de los productos y comparó con la competencia identificando puntos fuertes
+ 	|
+	v
+Compra: agregó productos al carrito y presionó comprar
+ 	|
+	v
+Retención: después de la compra se le dio un cupón de descuento para la próxima compra. Además, a partir de su historial de pedidos se le recomendaron productos que le interesaron
+ 	|
+	v
+Recomendación: dejó una reseña satisfactoria y le contó a sus amigos.
+
+PARTE 2
+El diagrama tiene un bajo acoplamiento y buena cohesión, ya que no todo depende de todo, y en el contexto de tienda online, tiene sentido. 
+-Para hacer búsquedas la página se basa en su historial, para recomendarle las cosas que le gustaron previamente.
+-Desde el catálogo de productos es que defino el carrito y lo que comprará.
+-A partir del perfil de usuario, donde se guardan los métodos de pago previamente usado, hago los pagos.
+Es posible modificar un módulo sin afectar a los otros, ya que son bastante independientes entre unos y otros. Cada uno tiene bien definida sus responsabilidades, por lo que al cambiar uno, no te afecta al otro.
+
+CORRECCIÓN PARTE 2
+-Historial de pedido y datos del usuario no tienen que estar en el mismo módulo, podría tener cada uno por separado porque cada uno hace cosas diferentes. Lo mismo con el carrito y el pago, son eventos distintos que deberían estar disjuntos
+-dependencia innecesaria entre el historial de pedido y carrito de pago (el historial de pago no debería interactuar con el carrito, pero al revés si)
+
+
