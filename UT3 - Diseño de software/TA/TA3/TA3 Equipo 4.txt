@@ -1,0 +1,15 @@
+1) Diagrama de clases: se quiere representar entidades y relaciones entre ellas
+
+2) Diagrama de secuencia: se quiere ver la interacción de objetos
+
+3) Diagrama de actividad: se quiere ver el flujo de trabajo
+
+4) Diagrama de paquetes: se quieren ver las dependencias entre los módulos
+
+5) Diagrama de componentes: se quiere entender las responsabilidades y dependencias entre componentes
+
+6) Diagrama de despliegue: se quiere ver la infraestructura de los sistemas al desplegar
+
+7) Diagrama de secuencia: se quiere ver las interacciones entre los componentes
+
+8) Diagrama de clases: se quieren representar entidades
