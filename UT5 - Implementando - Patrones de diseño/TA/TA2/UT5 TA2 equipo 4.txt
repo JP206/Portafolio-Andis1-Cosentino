@@ -1,0 +1,39 @@
+Ejercicio 1
+Antipatrón: blob, porque contiene muchos métodos que no tienen relación entre sí.
+Para solucionarlo, se deben crear una clase para gestionar tareas, otra para gestionar usuarios, otra para gestionar permisos y así sucesivamente para cada conjunto de métodos que estén relacionados entre sí dentro del blob. Dado que la clase para gestionar tareas debe contener la información de TODOs, los métodos y campos de la clase TODOController deben pasar a esta nueva clase, y TODOController podría borrarse.
+
+Ejercicio 2
+Antipatrón: cut-and-paste programming, dado que el código de validación se repite en todos los métodos.
+Para solucionarlo, se debe extraer de cada método y colocarlo dentro de una clase que se encargue de validar, para poder reutilizar el código y modularizarlo.
+
+Ejercicio 3
+Antipatrón: spaghetti code porque se da a entender que hay demasiada lógica en la clase y no se sigue una estructura en el código.
+Para solucionarlo se debe simplificar la lógica, agregando clases que alberguen métodos auxiliares que serán utilizados en el método ProcessData().
+
+Ejercicio 4
+Antipatrón: cut-and-paste programming, ya que se copia el código que existe en otro método y se coloca en otro.
+Para solucionarlo, se puede crear un único método que pueda validar diferentes cosas, dado que el segundo método es una validación muy similar al primero.
+
+Ejercicio 5
+Antipatrón: lava flow, porque hay mucho código sin utilizar.
+Para solucionarlo, se debe quitar la clase que no se utiliza.
+
+Ejercicio 6
+Antipatrón: golden hammer, ya que se hereda de una clase que luego no se utiliza en absoluto.
+Para solucionarlo, no debe heredar de Superclass y en cambio verificar si es necesario que herede de otra clase. En caso de ser necesario, que no sea Superclass, sino de una adecuada.
+
+Ejercicio 7
+Antipatrón: golden hammer, dado que es una librería que se utiliza en toda la aplicación y probablemente no sea necesaria.
+Para solucionarlo, no utilizar la librería en todo el código, solamente en aquellos lugares donde sea necesario. Donde se está utilizando actualmente y no es necesario, buscar alguna otra librería que se ajuste más a lo requerido.
+
+Ejercicio 8
+Antipatrón: blob, porque la clase tiene mucho código.
+Para solucionarlo, separar en clases que modelen cada tarea, y que MyClass utilice objetos de estas clases.
+
+Ejercicio 9
+Antipatrón: spaghetti code, porque tiene mucho código y no es extensible. Además, si se necesita cambiar algo, hay que cambiar todo el método.
+Para solucionarlo, se puede separar en clases partes del código, como la parte donde se calcula el taxRate, y CalculateNetSalary debería utilizar esa clase.
+
+Ejercicio 10
+Antipatrón: tester driven development, dado que se agregó una cantidad de código luego de hacer testing.
+Para solucionarlo, sacar el código que se agregó luego de testear, y agregarlo luego de que sea validado por el equipo.
