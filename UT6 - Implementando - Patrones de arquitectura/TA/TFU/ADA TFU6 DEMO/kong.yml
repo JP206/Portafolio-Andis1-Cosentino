@@ -1,0 +1,16 @@
+_format_version: "1.1"
+services:
+  - name: example-service
+    url: http://backend-service:8080
+    routes:
+      - name: example-route
+        paths:
+          - /
+
+plugins:
+  - name: request-transformer
+    service: example-service
+    config:
+      add:
+        headers:
+          - X-Kong-Proxy-ID:true

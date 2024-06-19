@@ -1,0 +1,7 @@
+Estimados!
+
+Les pedimos que agreguen un breve informe sobre las diferencias que tienen entre los modelos presentados en la TFU_UT3 y el TFU_UT4.
+
+No los tienen que implementar.
+
+Lo adjunta un participante por grupo.

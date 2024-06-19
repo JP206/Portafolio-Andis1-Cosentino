@@ -1,0 +1,24 @@
+Ejercicio 0
+Cumple con SRP porque su única responsabilidad es crear objetos.
+Cumple con OCP porque no es necesario modificar lo existente para agregar métodos constructores, solamente se extiende.
+Cumple con LSP porque a través de una interfaz crea objetos que pueden variar entre sí, pero que todos implementan la interfaz.
+Cumple con ISP porque no hay métodos que no estén implementados, todos son utilizados.
+No cumple con DIP porque no depende de nada, la información necesaria está dentro de la clase.
+
+Ejercicio 1
+Para resolver el problema se debe aplicar el patrón factory method. Se crea una clase creator que es el responsable de crear productos, y se utilizará para crear los distintos tipos de sandwich que implementarán una misma interfaz. Dentro de esta clase, se derivará la construcción de los objetos a los constructores correspondientes.
+
+Ejercicio 2
+El patrón prototype podría resolver este problema. Para ello, se debe crear una interfaz que tenga un método clone() que debe ser implementado por Archer y Knight, donde cada uno sobreescibe clone() para que se adecúe a cada clase. 
+
+Ejercicio 3
+El patrón factory method podría resolver el problema. Hay una clase que es la encargada de crear objetos que implementen una interfaz mensaje, y el factory derivará la construcción de los objetos a la clase apropiada.
+
+Ejercicio 4
+El patrón prototype puede resolver este problema. En vez de copiar a mano los libros, estos deberían implementar una interfaz que contenga un método copy(), y se llama el método dentro de cada libro previo a prestarlo a otras personas.
+
+Ejercicio 5
+El patrón builder puede resolver el problema, porque en el constructor actual hay valores en null en los parámetros. Con el patrón, se puede crear objetos paso a paso sin necesidad de tener un constructor genérico para todos los objetos que luego tendrán diferencias.
+
+Ejercicio 6
+El patrón singleton puede resolver este problema, al hacer una clase estática que se pueda acceder fácilmente desde cualquier parte del código.

@@ -1,0 +1,57 @@
+services:
+  # DB-less Kong
+  kong:
+    image: kong:latest
+    environment:
+      KONG_DATABASE: "off"
+      KONG_DECLARATIVE_CONFIG: /usr/local/kong/declarative/kong.yml
+      KONG_PROXY_ACCESS_LOG: /dev/stdout
+      KONG_ADMIN_ACCESS_LOG: /dev/stdout
+      KONG_PROXY_ERROR_LOG: /dev/stderr
+      KONG_ADMIN_ERROR_LOG: /dev/stderr
+      KONG_ADMIN_LISTEN: '0.0.0.0:8001, 0.0.0.0:8444 ssl'
+    ports:
+      - '8000:8000'
+      - '8443:8443'
+      - '8001:8001'
+      - '8444:8444'
+    volumes:
+      - ./kong.yml:/usr/local/kong/declarative/kong.yml  # Mount the configuration file into the container
+    networks:
+      - demo-network
+
+  # Forward Proxy
+  forward-proxy:
+    image: nginx:alpine
+    volumes:
+      - ./nginx-forward-proxy.conf:/etc/nginx/nginx.conf
+    ports:
+      - '8888:8888'
+    networks:
+      - demo-network
+
+  # Reverse Proxy
+  reverse-proxy:
+    image: nginx:alpine
+    volumes:
+      - ./nginx-reverse-proxy.conf:/etc/nginx/nginx.conf
+    ports:
+      - '80:80'
+    networks:
+      - demo-network
+
+  # Backend
+  backend-service:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - '8080:8080'
+    networks:
+      - demo-network
+
+# Me Network
+networks:
+  demo-network:
+    driver: bridge
+

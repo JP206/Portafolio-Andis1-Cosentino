@@ -1,0 +1,30 @@
+Ejercicio 0
+Se aplica SRP porque cada clase decoradora se encarga de agregar una transformación al objeto base, por lo que tienen una única responsabilidad.
+Se aplica OCP porque se pueden agregar clases decoradoras, y esta extensión surge sin modificar la clase base.
+Se aplica LSP porque cada decorador toma cualquier objeto que implemente una interfaz, en el ejemplo de los cafés se puede utilizar cualquier decorador con cualquier combinación de café y decoradores.
+Se aplica ISP porque cada decorador es un derivado de una clase, y utiliza todos los métodos que tiene. No ocurre que un decorador tenga métodos que no utilice pero que otro sí use.
+Se aplica DIP porque cada decorador depende de una superclase, lo que reduce acoplamiento. La superclase puede ser abstracta, con lo cual dependería de una abstracción.
+
+Ejercicio 1
+Se debería usar adapter, creando una única clase capaz de adaptar a los distintos formatos. Debe incluir los métodos ExportAsJson, ExportAsXml, ExportAsTxt, y en el código se debe crear un objeto de esta clase y llamar los métodos correspondientes.
+
+Ejercicio 2
+Se debería usar bridge, crear una clase abstracta que sea el IService, y dentro de IQuickPay se debería pasar por parámetro a MakePayment IService, y dentro de MakePayment hacer polimorfismo que identifique si es del tipo QuickPay o SafePay.
+
+Ejercicio 3
+Se debería usar decorator, ya que un mensaje se puede mandar por diferentes medios, donde cada medio es representado por un decorador. Primero se crea un objeto mensaje y luego se crean los decoradores de acuerdo al medio por el cual se quiere transmitir.
+
+Ejercicio 4
+Se debería usar facade para unificar los diferentes subsistemas, generando que el usuario se comunica con esta interfaz genérica y la interfaz se encarga de derivar a las clases correspondientes. Las clases son las mismas, y la interfaz debe contener métodos que se encarguen de derivar a los sistemas correspondientes.
+
+Ejercicio 5
+Se debería usar proxy, creando una clase que se encargue de verificar los permisos. En vez de mostrar el contenido del documento directamente, primero se comunica con el proxy y este verifica los permisos.
+
+Ejercicio 6
+Se debería usar facade porque se llaman 3 métodos de sistemas diferentes cada vez que se agrega un producto al carrito. Con el facade, se debería crear una clase que contenga un único método, que al llamarlo se encargue de comunicarse con todos los sistemas.
+
+Ejercicio 7
+Se debería usar facade, porque es análogo al ejercicio anterior. Se llaman los métodos secuencialmente y se utilizan varias clases distintas, con el facade se comunicaría una sola vez con una única clase y obtendría el mismo resultado.
+
+Ejercicio 8
+Se debería usar bridge porque aquí se puede separar lo gráfico de lo lógico. Los estilos, colores y decoración pueden ser abstracciones, mientras que lo concreto es crear los textos.

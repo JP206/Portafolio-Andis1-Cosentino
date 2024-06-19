@@ -1,0 +1,36 @@
+Ejercicio 0
+Se aplica SRP porque cada handler tiene una única responsabilidad.
+Se aplica OCP porque no se modifican los handlers existentes, sino que se agregan nuevos a la cadena.
+Se aplica LSP porque los handlers implementan una interfaz y la clase padre interactúa a través de la interfaz.
+Se aplica ISP porque ningún handler tiene código que no usa.
+Se aplica DIP porque los handlers dependen de una interfaz.
+
+Ejercicio 1
+Se debe aplicar el patrón observer, donde cada alumno se suscribe al examen y estos reciben una notificación. Ahora mismo están en espera activa, además de que se debe especificar cuáles alumnos notificar. Con el patrón, existe una lista donde no importa cuáles alumnos son.
+
+Ejercicio 2
+Se debe aplicar memento para llevar el historial de estados del jugador. Actualmente se crea un objeto donde se guarda el estado, y cuando se restaura se debe especificar ese objeto en particular. Con el patrón, se reduce el acoplamiento con las clases creadas, ya que todos los estados van a estar en una clase central.
+
+Ejercicio 3
+Se debe utilizar mediator para evitar que los objetos se comuniquen entre sí y estén acoplados. Sería necesario crear una clase mediadora, la cual será referenciada dentro de los usuarios y cuando estos necesiten enviar un mensaje, utilizarán el método del mediador.
+
+Ejercicio 4
+Se debe utilizar el patrón state, creando una clase context con un método para cambiar los estados. De acuerdo al estado que se pasa, se ejecutan los métodos correspondientes de la clase de ese estado, el cual implementa una interfaz común para todos los estados.
+
+Ejercicio 5
+Se debe usar visitor, donde se crea una clase que tenga la función Feed() y los animales la visitan y ejecutan esa función. 
+
+Ejercicio 6
+Se debe utilizar state para hacer los cambios entre los colores del semáforo. De esta forma, no es necesario codificar todas las posibilidades, sino que cada estado cambia al correcto cuando se llama ChangeLight().
+
+Ejercicio 7
+Se debe utilizar strategy para aplicar el algoritmo correspondiente a cada caso, sin necesidad de tener el código de cada algoritmo dentro de la clase. De esta forma se baja el acoplamiento y la complejidad del código.
+
+Ejercicio 8
+Se debe usar observer para mantener una lista de suscriptores y notificarlos a todos juntos, sin necesidad de enviar uno por uno un mail.
+
+Ejercicio 9
+Se debe usar chain of responsibility, para encapsular la lógica de procesamiento dentro de clases independientes, para reducir el acoplamiento y la complejidad del código. Cada nivel debe ser un handler, y si el mensaje que se envía no es el nivel correspondiente, se envía a otro handler.
+
+Ejercicio 10
+Se debe utilizar strategy, siendo cada estrategia acorde a cada nacionalidad. En el main se debe enviar la nacionalidad y se elige la estrategia acorde a ella.
