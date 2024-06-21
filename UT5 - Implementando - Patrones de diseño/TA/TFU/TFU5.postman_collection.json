@@ -1,0 +1,166 @@
+{
+	"info": {
+		"_postman_id": "0d9d1111-80a5-4b9a-bfe9-262ef4621a71",
+		"name": "TFU5",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30126871"
+	},
+	"item": [
+		{
+			"name": "Cometitor request success",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}{{host}}/competitor",
+					"host": [
+						"{{url}}{{host}}"
+					],
+					"path": [
+						"competitor"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "competitor Name request success",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}{{host}}/competitor/?name=UsainBolt",
+					"host": [
+						"{{url}}{{host}}"
+					],
+					"path": [
+						"competitor",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "UsainBolt"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "competitor Name request error",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}{{host}}/competitor/?name=awzdfgh",
+					"host": [
+						"{{url}}{{host}}"
+					],
+					"path": [
+						"competitor",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "awzdfgh"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "live reviews request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}{{host}}/live_reviews",
+					"host": [
+						"{{url}}{{host}}"
+					],
+					"path": [
+						"live_reviews"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "needed reviews request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}{{host}}/needed_reviews",
+					"host": [
+						"{{url}}{{host}}"
+					],
+					"path": [
+						"needed_reviews"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost",
+			"type": "string"
+		},
+		{
+			"key": "disciplines",
+			"value": "/disciplines",
+			"type": "string"
+		},
+		{
+			"key": "event",
+			"value": "/event",
+			"type": "string"
+		},
+		{
+			"key": "participant",
+			"value": "/participant",
+			"type": "string"
+		},
+		{
+			"key": "result",
+			"value": "/result",
+			"type": "string"
+		},
+		{
+			"key": "judge",
+			"value": "/judge",
+			"type": "string"
+		},
+		{
+			"key": "host",
+			"value": ":8080",
+			"type": "string"
+		}
+	]
+}
