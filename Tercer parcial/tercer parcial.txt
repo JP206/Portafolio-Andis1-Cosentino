@@ -1,0 +1,14 @@
+Parcial 2023
+
+Ejercicio 1
+Antipatrón: lava flow, se debería borrar todo el código que no sirve para dejar el código limpio.
+Para agregar nuevos métodos de cálculos de sueldo se podría utilizar strategy, creando una clase llamada contexto que se encargue de derivar a las diferentes estrategias según lo que se quiera. Luego, en la clase EmployeeManager, se debe colocar una referencia al contexto.
+
+Ejercicio 2
+Dado que los operadores del sistema son propensos a cometer errores, se podría utilizar el patrón memento para guardar estados anteriores a los que volver en caso de error. Se debe crear una clase encargada de almacenar los estados de los objetos, donde se irán guardando los diferentes estados a medida que se está conforme con el mismo. En caso de error, esta clase tendrá un método que restaura el último estado de un objeto.
+
+Ejercicio 3
+Se debe utilizar el patrón observer para tener una lista de suscriptores y al momento de notificar, se notifica a cada uno de ellos. Se debe unificar el sistema de notificaciones y las personas se suscriben a los medios que quieran.
+
+Ejercicio 4
+Se debe utilizar el patrón adapter para convertir el pago por socket a un pago por api rest. Se debe crear una clase RestAdapter que se le pase por parámetro al constructor un objeto de tipo SocketPaymentProcessor, y este es del tipo de RestPaymentProcessor, por lo que se puede usar con el sistema.
