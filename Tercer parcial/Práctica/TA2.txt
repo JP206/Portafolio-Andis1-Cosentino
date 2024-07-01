@@ -1,0 +1,229 @@
+Ejercicio 1
+El antipatrón es the blob porque hay un montón de funcionalidades y responsabilidades en la clase TODOController. Para solucionarlo, se deben separar las responsabilidades en clases diferentes.
+
+public class TODOController {
+	private List<Todo> todos;
+
+	public TodoController() {
+		this.todos = new List<Todo>();
+	}
+
+	public void Add(Todo todo) {
+		todos.Add(todo);
+	}
+
+	public void Delete(int id) {
+		Todo todo = todos.Find(t => t.Id == id);
+		if (todo != null)
+			todos.Remove(todo);
+	}
+
+	public void Update(Todo todo) {
+		Todo oldTodo = todos.Find(t => t.Id == todo.Id);
+		if (oldTodo != null) {
+			oldTodo.Title = todo.Title;
+			oldTodo.Description = todo.Description;
+			oldTodo.Completed = todo.Completed;
+		}
+	}
+}
+
+public class GestorTodos {
+	//lógica de gestión de tareas
+}
+
+public class GestorUsuarios {
+	//lógica de gestión de usuarios
+}
+
+public class GestorPermisos {
+	//lógica de gestión de permisos
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 2
+El antipatrón es cut-and-paste programming, porque se ve que se utiliza el mismo validation code en todos los métodos. Se puede crear una función que se encargue de validar y llamarla cada vez.
+
+public class UserManager {
+	//código
+	
+	public bool Validation(int id) {
+		//asumo que se valida el id en los métodos
+	}
+
+	public bool Validation(string name) {
+		//CreateUser tiene validación, no sé qué valida pero asumo que el nombre
+	}
+
+	public void CreateUser(string name, string email, string password) {
+		if (Validation(name)) {
+			//guardar usuario en base de datos
+		}
+	}
+
+	public void DeleteUser(int id) {
+		if (Validation(id)) {
+			//borrar usuario de la base de datos
+		}
+	}
+
+	public void UpdateUser(int id, string name, string email, string password) {
+		if (Validation(id)) {
+			//actualizar usuario en la base de datos
+		}
+	}
+
+	public void ChangePassword(int id, string oldPassword, string newPassword) {
+		if (Validation(id)) {
+			//actualizar contraseña en la base de datos
+		}
+	}
+
+	//resto de funciones
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 3
+El antipatrón es spaghetti code, porque no se ve una estructura clara en el código y parece bastante mezclado. Para solucionarlo se debe separar en clases y funciones la lógica.
+
+public void ProcessData() {
+	//crear una clase o una función con el "Lots of logic"
+	int x = GetData();
+	int y = x + 10;
+	//crear una clase o función con el código
+	if (y > 50) {
+		//función o clase
+	}
+	else {
+		//función o clase
+	}
+
+	//función o clase
+	SaveData(y);
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 4
+El antipatrón es cut-and-paste programming porque si el código es muy similar y los parámetros que se pasan son strings, entonces probablemente se copió y pegó el código. Se puede solucionar al crear un único método que se encargue de validar, con un condicional para ver si tiene que validar un input o una contraseña, ya que son un poco diferentes los métodos.
+
+public void Validate(string input, bool isPassword) {
+	if (isPassword) {
+		//validar contraseña
+	}
+	else {
+		//validar input
+	}
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 5
+El antipatrón es lava flow, porque hay mucho código sin usar que no aporta al programa. Se debe eliminar el código que no se usa, y en caso de que no se use la clase, se debe borrar la clase entera.
+
+================================================================================
+================================================================================
+
+Ejercicio 6
+El antipatrón es golden hammer, porque se está utilizando una clase que no sirve para nada utilizarla. En vez de utilizar una clase que aporte al código de Subclass, se está utilizando una que probablemente se esté utilizando en muchos más lados de forma similar. No se debe utilizar Superclass, en cambio ver si hay alguna otra que sirva.
+
+public class Superclass {
+	public virtual void DoWork() {
+		//Do some work
+	}
+}
+
+public class Subclass {
+	public void DoWork() {
+		//work
+	}
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 7
+El antipatrón es golden hammer, porque se usa la librería en todo el código. No utilizar la librería en todos lados, solamente donde sea necesario. Supongo que en esta clase es correcta la utilización, pero en todas las otras hay que revisar si es necesario.
+
+================================================================================
+================================================================================
+
+Ejercicio 8
+El antipatrón es blob porque hay código para diferentes tareas dentro de la misma función. Se debería separar el código para cada tarea en funciones.
+
+public class MyClass {
+	public void Task1() {
+		//código de la primera tarea
+	}
+
+	public void Task2() {
+		//código de la segunda tarea
+	}
+
+	public void Task3() {
+		//código de la tercera tarea
+	}
+
+	public void Task4() {
+		//código de la cuarta tarea
+	}
+
+	//crear estas funciones para cada tarea que haya
+	
+	public void DoManyThings() {
+		Task1();
+		Task2();
+		Task3();
+		Task4();
+	}
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 9
+El antipatrón es spaghetti code porque la función no cumple con OCP, si hay que cambiar algo se debe modificar la clase. 
+
+public double CalculateTaxRate(double grossSalary) {
+	if (grossSalary > 10000) {
+		return 0.3;
+	}
+	else if (grossSalary > 5000) {
+		return 0.2;
+	}
+	else {
+		return 0.1;
+	}
+}
+
+public double CalculateNetSalary(double grossSalary) {
+	double netSalary = grossSalary - (grossSalary * CalculateTaxRate(grossSalary));
+	return netSalary > 0 ? netSalary : 0;
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 10
+El antipatrón es tester driven development, porque se ve que se agregó código luego de iteraciones de pruebas. Para solucionarlo, no se debe agregar nada sin que antes se valide con el cliente y con quien esté a cargo. 
+
+public class ShoppingCart {
+	private Dictionary<Product, int> _items = new Dictionary<Product, int>();
+
+	public void AddProduct(Product product, int quantity) {
+		if (_items.CotainsKey(product)){
+			_items[product] += quantity;
+		}
+		else {
+			_items.Add(product, quantity);
+		}
+	}
+
+	//más métodos
+}

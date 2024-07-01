@@ -1,0 +1,222 @@
+Ejercicio 1
+Se viola el ISP, Interface Segregation Principle, porque la clase Perro está implementando una interfaz y no está utilizando uno de sus métodos. 
+
+public abstract class Animal {
+	public abstract void Comer();
+}
+
+public abstract class AnimalVolador {
+	public abstract void Volar();
+}
+
+public class Perro : Animal {
+	public override void Comer() {
+		// el perro come
+	}
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 2
+Se viola OCP, LSP y DIP. Dado que la mayoría de impresoras tienen escáner, no viola SRP tener los dos métodos.
+-OCP se viola porque si se manda un documento con otro formato, hay que cambiar el código del método Imprimir
+-LSP se viola porque se pasa una clase concreta al método Imprimir, no se puede utilizar ninguna otra clase
+-DIP se viola porque el método Imprimir depende de Documento, y Documento no es una abstracción
+
+public abstract class Documento {
+	public string Contenido;
+}
+
+public class Impresora {
+	public void Imprimir(Documento documento) {
+		Console.WriteLine(documento.Contenido)
+	}
+
+	public void Escanear(Documento documento) {
+		// código para escanear
+	}
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 3
+Se viola SRP porque la clase BaseDeDatos tiene dos responsabilidades, guardar un objeto y enviar un correo. Si se decide cambiar la forma en que se mandan correos o si se decide cambiar cómo se guarda un objeto, la clase BaseDeDatos debe cambiar.
+
+public class BaseDeDatos {
+	public void Guardar(Object objeto) {
+		//guardar objeto
+	}
+}
+
+public class EnviadorCorreos {
+	public void EnviarCorreo(string correo, string mensaje) {
+		//enviar correo
+	}	
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 4
+Se viola SRP porque la clase Robot tiene más de una responsabilidad, puede cambiar porque cambia la forma de limpiar o cocinar.
+
+public abstract class Robot {
+	public abstract void RecargarBateria();
+}
+
+public class RobotCocinero : Robot {
+	public void Cocinar() {
+		//cocinar
+	}
+
+	public override void RecargarBateria() {
+		//recargar bateria
+	}
+}
+
+public class RobotLimpiador : Robot {
+	public void Limpiar () {
+		//limpiar
+	}
+
+	public override void RecargarBateria() {
+		//recargar bateria
+	}
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 5
+Se viola OCP porque si cambia la manera de hacer un pedido se debe cambiar el método CrearPedido, no se puede extender para incorporar nuevas funcionalidades.
+
+public abstract class Pedido {
+	public abstract void CrearPedido();
+}
+
+public class Cliente {
+	private Pedido pedido
+
+	public void CrearPedido() {
+		pedido.CrearPedido();
+	}
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 6
+Se viola ISP porque la clase PatoDeGoma extiende la clase Pato pero no utiliza uno de sus métodos. También se viola DIP porque PatoDeGoma depende de una clase concreta y no de una abstracción.
+
+public abstract class PatoNoVolador {
+	public abstract void Nadar();
+
+	public abstract void Graznar();
+}
+
+public abstract class PatoVolador {
+	public abstract void Volar();
+}
+
+public class PatoDeGoma : PatoNoVolador {
+	public override void Nadar() {
+		//nadar
+	}
+
+	public override void Graznar() {
+		//graznar
+	}
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 7
+Se viola ISP porque la clase ReadDatabase implementa la interfaz IDatabase pero no utiliza todos sus métodos.
+
+public interface IDatabase {
+	public void Connect();
+	
+	public void Disconnect();
+}
+
+public interface IDatabaseWriter {
+	public void WriteData();
+}
+
+public class Database : IDatabase, IDatabaseWriter {
+	public void Connect() {
+		//conectar
+	}
+
+	public void Disconnect() {
+		//desconectar
+	}
+
+	public void WriteData() {
+		//escribir datos
+	}
+}
+
+public class ReadDatabase : IDatabase {
+	public void Connect() {
+		//conectar
+	}
+
+	public void Disconnect() {
+		//desconectar
+	}
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 8
+Se viola OCP porque no está abierta a la extensión la clase FileSaver, dado que no se puede agregar una funcionalidad para guardar archivos con nombre vacío, sino que hay que modificar el método existente.
+
+public class FileSaver {
+	public void SaveToFile(string fileName, Document doc) {
+		//guardar archivo
+	}
+
+	public void SaveToFile(Document doc) {
+		//guardar archivo
+	}
+}
+
+public class AutoSave : FileSaver {
+	public void Save(Document doc) {
+		SaveToFile(doc);
+	}
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 9
+Viola el principio DIP porque User depende de una clase concreta (Post) y no de una abstracción.
+
+public abstract class Post { 
+	public User Author { get; set; }
+}
+
+public class User {
+	public bool IsAdmin { get; set; }
+	public bool CanEditPost(Post post) {
+		return IsAdimn || post.Author == this
+	}
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 10
+Se viola LSP porque hay un método para cada formato, a pesar de que los formatos son todos de audio. Deberían ser intercambiables dentro de MusicPlayer
+
+public class MusicPlayer {
+	public void Play(string ileName) {
+		//lógica para reproducir
+	}
+}

@@ -1,0 +1,431 @@
+Ejercicio 0
+El patrón decorator cumple con:
+	- SRP porque cada decorador cumple con una responsabilidad única
+	- OCP porque si es necesario agregar algo a un objeto, se crea un nuevo decorador al extender los existentes. No es necesario modificar los que ya están creados
+	- LSP porque como los decoradores implementan una interfaz general, se pueden sustituir decoradores
+	- ISP porque los objetos que implementan los decoradores los implementan para utilizar todos sus métodos. Si un objeto no utiliza los métodos de un decorador, se puede remover
+	- DIP porque los objetos dependen de los decoradores que son abstractos, no dependen de clases concretas
+
+================================================================================
+================================================================================
+
+Ejercicio 1
+El problema se puede resolver utilizando decorator, ya que este patrón permite añadir funcionalidades a objetos fácilmente.
+
+public interface IDataExport {
+	public string Export(object data);
+}
+
+public class DataExport : IDataExport {
+	private string name;
+	private int age;	
+	
+	public DataExport(string name, int age) {
+		this.name = name;
+		this.age = age;
+	}
+
+	public string Export(object data) {
+		return data;
+	}
+}
+
+public class DataExportDecorator : IDataExport {
+	protected IDataExport wrapee;
+
+	public DataExportDecorator(IDataExport dataExport) {
+		wrapee = dataSource;
+	}
+
+	public string Export(object data) {
+		wrapee.Export(data);
+	}
+}
+
+public class JsonDecorator extends DataExportDecorator {
+	public string Export(object data) {
+		object JsonData = JsonConvert.SerializeObject(data);
+		(super) wrapee.Export(JsonData);
+	} 
+}
+
+public class XmlDecorator extends DataExportDecorator {
+	public string Export(object data) {
+		XmlSerializer xmlSerializer = new XmlSerializer(data.GetType());
+		using(StringWriter textWriter = new StringWriter()) {
+			xmlSerializer.Serializer.Serialize(textWriter, data);
+			(super) wrapee.Export(textWriter);
+		}
+	}
+}
+
+public class TxtDecorator() {
+	public string Export(object data) {
+		(super) wrapee.Export(data.ToString());
+	}
+}
+
+class Program{
+	static void Main() {
+		DataExport data = new DataExport("juancito", 30);
+
+		JsonDecorator jsonDecorator = new JsonDecorator(data);
+		jsonDecorator.Export(data);
+
+		XmlDecorator xmlDecorator = new XmlDecorator(data);
+		xmlDecorator.Export(data);
+
+		TxtDecorator txtDecorator = new TxtDecorator(data);
+		txtDecorator.Export(data);
+	}
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 2
+Este problema se puede resolver con el patrón adapter, dado que el mismo se encarga de hacer que dos objetos que no son compatibles funcionen como si lo fueran.
+
+public interface IQuickPay {
+	bool MakePayment(double amount, string currency);
+}
+
+public class QuickPayService : IQuickPay {
+	public bool MakePayment(double amount, string currency) {
+		Console.WriteLine($"Pagado {amount} {currency} usando QuickPay.");
+		return true; //simular éxito
+	}
+}
+
+public class SafePayService {
+	public void Transact(string fromAccount, string toAccount, string currencyType, double amount) {
+		Console.WriteLine($"Transfiriendo {amount} {currencyType} de {fromAccount} a {toAccount} usando SafePay.");
+	}
+}
+
+public class SafePayServiceAdapter extends QuickPayService {
+	QuickPayService quickPayService;
+
+	public bool UseSafePayService(string fromAccount, string toAccount, string currencyType, double amount) {
+		quickPayService.MakePayment(amount, currencyType);	
+	}
+}
+
+public class OnlineStore {
+	private IQuickPay _paymentService;
+ 	
+	public OnlineStore(IQuickPay paymentService) {
+ 		_paymentService = paymentService;
+ 	}
+ 
+	public void Checkout(double amount, string currency)
+	 {
+		if (_paymentService.MakePayment(amount, currency)) {
+ 			Console.WriteLine("Pago exitoso!");
+ 		}
+ 		else {
+			Console.WriteLine("El pago ha fallado.");
+ 		}
+ 	}
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 3
+Este problema se puede solucionar con decorator, dado que se puede mantener el código existente y se pueden agregar funcionalidades a través de decoradores. Asumo que se quiere mandar notificaciones por todos los medios.
+
+public abstract class Notification {
+	public abstract void Send(string message);
+}
+
+public class EmailNotification : Notification {
+	public override void Send(string message) {
+		Console.WriteLine($"Enviando correco electrónico: {message}");
+	}
+}
+
+public class EmailNotificationDecorator : Notification {
+	Notification wrapee;
+
+	public EmailNotificationDecorator(Notification notification) {
+		wrapee = notification;
+	}
+
+	public override void Send(string message) {
+		wrapee.Send(message);
+	}
+}
+
+public class SmsNotificationDecorator extends EmailNotificationDecorator {
+	public void Send(string message) {
+		Console.WriteLine($"Enviando sms: {message}");
+		(super) wrapee.Send(message);
+	}
+}
+
+public class TwitterNotificationDecorator extends EmailNotificationDecorator {
+	public void Send(string message) {
+		Console.WriteLine($"Enviando mensaje por twitter: {message}");
+		(super) wrapee.Send(message);
+	}
+}
+
+public class FacebookNotificationDecorator extends EmailNotificationDecorator {
+	public void Send(message) {
+		Console.WriteLine($"Enviando mensaje por facebook: {message}");
+		(super) wrapee.Send(message);
+	}
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 4
+Este problema se puede resolver utilizando facade, dado que el patrón permite simplificar sistemas y clases complejas ofreciendo una interfaz con pocos métodos, que cumplen con las mismas funciones que utilizar lo otro.
+
+public class ReservationSystem {
+ 	public void ReserveRoom(string roomType) {
+		Console.WriteLine($"Reservando una habitación de tipo: {roomType}");
+	}
+}
+
+public class RestaurantManagementSystem {
+	public void BookTable(string tableType) {
+		Console.WriteLine($"Reservando una mesa de tipo: {tableType}");
+	}
+}
+
+public class CleaningServiceSystem {
+	public void ScheduleRoomCleaning(string roomNumber) {
+		Console.WriteLine($"Programando la limpieza para la habitación número: {roomNumber}");
+ 	}
+}
+
+public class Facade {
+	ReservationSystem reservationSystem = new ReservationSystem();
+	RestaurantManagementSystem restaurantSystem = new RestaurantManagementSystem();
+	CleaningServiceSystem cleaningSystem = new CleaningServiceSystem();
+
+	public void ReserveRoom(string roomType) {
+		reservationSystem.ReserveRoom(roomType);
+	}
+
+	public void BookTable(string tableType) {
+		restaurantSystem.BookTable(tableType);
+	}
+
+	public void ScheduleRoomCleaning(string roomNumber) {
+		cleaningSystem.ScheduleRoomCleaning(roomNumber);
+	}
+}
+
+class Program {
+	static void Main() {
+		Facade facade = new Facade();
+
+		facade.ReserveRoom("Deluxe");
+		facade.BookTable("VIP");
+		facade.ScheduleRoomCleaning("101");
+
+		//Do stuff...
+	}
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 5
+Este problema se puede resolver con proxy, dado que el proxy controla el acceso al objeto original, siendo capaz de realizar un comportamiento antes (o después) de que la solicitud llegue al objeto original.
+
+public abstract class ADocument {
+	private string _content;
+	
+	public abstract void Display();
+}
+
+public class Document extends ADocument {
+	private string _content;
+
+	public Document(string content) {
+		_content = content;
+	}
+
+	public override void Display() {
+		Console.WriteLine($"Contenido del documento: {_content}");
+	}
+}
+
+public class DocumentProxy extends ADocument {
+	private ADocument document;
+
+	public DocumentProxy(ADocument document) {
+		this.document = document;
+	}
+
+	public override void Display() {
+		if (usuarioTienePermiso) {
+			document.Display();
+		}
+		else {
+			Console.WriteLine("no tiene permiso");
+		}
+	}
+}
+
+class Program {
+	static void Main() {
+		ADocument document = new Document("Este es un documento importante");
+		ADocument documentProxy = new DocumentProxy(document);
+		documentProxy.Display();
+	}
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 6
+Este problema se puede resolver con facade, ya que permite simplificar el uso de varias clases en una sola.
+
+public class CartSystem {
+	public void AddToCart(string product, int quantity) {
+		Console.WriteLine(...);
+	}
+}
+
+public class InventorySystem {
+	public void ReduceStock(string product, int quantity) {
+		Console.WriteLine(...);
+	}
+}
+
+public class BillingSystem {
+	public voide GenerateInvoice(string product, int quantity) {
+		Console.WriteLine(...);
+	}
+}
+
+public class Facade {
+	CartSystem cart = new CartSystem();
+	InventorySystem inventory = new InventorySystem();
+	BillingSystem billing = new BillingSystem();
+	string product;
+	int quantity;
+
+	public Facade(string product, int quantity) {
+		this.product = product;
+		this.quantity = quantity;
+	}
+
+	public void Buy() {
+		cart.AddToCart(product, quantity);
+		inventory.ReduceStock(product, quantity);
+		billing.GenerateInvoice(product, quantity);
+	}
+}
+
+class Program {
+	static void Main() {
+		Facade facade = new Facade("Libro", 2);
+		facade.Buy();
+	}
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 7
+Este problema se puede resolver con facade, ya que se puede simplificar la creación de varias clases y llamados de métodos en una sola clase, con un solo método.
+
+public class TwitterAuthenticator {
+	public string Authenticate(string apiKey, string apiSecret) {
+ 		// Lógica para autenticarse en la API de Twitter y obtener un token de acceso.
+ 		// Para simplificar el ejemplo, vamos a suponer que siempre recibimos un token "ABC123".
+ 		Console.WriteLine("Autenticando en la API de Twitter...");
+ 		return "ABC123";
+ 	}
+}
+
+public class TwitterApi {
+	public string MakeApiRequest(string endpoint, string accessToken) {
+		// Lógica para hacer una solicitud a la API de Twitter.
+ 		// Para simplificar el ejemplo, vamos a suponer que siempre recibimos un JSON de respuesta.
+ 		Console.WriteLine($"Haciendo una solicitud a {endpoint}...");
+ 		return "{\"user\": \"john_doe\", \"post_count\": 42}";
+	}
+}
+
+public class TwitterDataParser {
+ 	public int ParsePostCount(string jsonResponse) {
+ 		// Lógica para parsear el JSON y extraer la cantidad de posts.
+ 		// Para simplificar, vamos a suponer que siempre recibimos 42.
+ 		Console.WriteLine("Parseando la respuesta de la API...");
+ 		return 42;
+ 	}
+}
+
+public class Facade {
+	TwitterAuthenticator authenticator = new TwitterAuthenticator();
+	TwitterApi api = new TwitterApi();
+	TwitterDataParser parser = new TwitterDataParser();
+
+	public void Solicitud(string apiKey, string apiSecret, string endpoint) {
+ 		// Autenticarse en la API de Twitter
+ 		string accessToken = authenticator.Authenticate(apiKey, apiSecret);
+ 		// Hacer una solicitud a la API de Twitter para obtener información del usuario
+ 		string jsonResponse = twitterApi.MakeApiReques (endpoint, accessToken);
+ 		// Parsear la respuesta JSON para extraer la cantidad de posts
+ 		int postCount = dataParser.ParsePostCount(jsonResponse);
+ 		// Mostrar la cantidad de posts
+ 		Console.WriteLine($"Cantidad de posts del usuario john_doe: {postCount}");
+	}
+}
+
+class Program {
+	static void Main {
+		Facade facade = new Facade();
+		facade.Solicitud("api_key", "api_secret", "https://api.twitter.com/users/john_doe");
+	}
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 8
+Se puede resolver el problema utilizando bridge, separando lo visual del texto en sí. Esto se logra al crear una clase abstracta que será utilizada en ElementoTexto para llevar a cabo las tareas.
+
+public abstract class ElementoTextoVisual {
+	private string _estiloFuente;
+	private string _color;	
+	private string _decoracion;
+
+	public void SetEstiloFuente(string estiloFuente);
+	public void SetColor(string color);
+	public void SetDecoracion(string decoracion);
+	public string ObtenerTexto(string texto);
+}
+
+public class ElementoTexto {
+	ElementoTextoVisual elementoVisual;
+	private string _texto;
+
+	public ElementoTexto(string texto) {
+		_texto = texto;
+	}
+
+	public void SetEstiloFuente(string estiloFuente) {
+		elementoVisual.SetEstiloFuente(esiloFuente);
+	}
+	
+	public void SetColor(string color) {
+		elementoVisual.SetColor(color);
+	}
+
+	public void SetDecoracion(string decoracion) {
+		elementoVisual.SetDecoracion(decoracion);
+	}
+
+	public string ObtenerTexto() {
+		return elementoVisual.ObtenerTexto(_texto);
+	}
+}

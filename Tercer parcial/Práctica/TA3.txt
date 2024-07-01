@@ -1,0 +1,372 @@
+Ejercicio 0
+En el patrón builder se aplica:
+	- SRP porque la clase builder contiene una única responsabilidad que es la construcción de objetos
+	- OCP porque si se necesita algún parámetro más en la construcción de objetos, se agrega un nuevo método al builder y no es necesario cambiar lo existente
+	- LSP porque el builder construye objetos genéricos que luego se le agregan cosas, estos objetos son intercambiables
+	- ISP porque builder no implementa ninguna interfaz que no utilice
+	- DIP porque no depende de ninguna clase concreta
+
+================================================================================
+================================================================================
+
+Ejercicio 1
+Este problema puede ser resuelto utilizando el patrón builder, dado que el mismo es útil en casos donde se quieren crear varias instancias de una clase con valores distintos, evitando tener un constructor con muchos parámetros donde algunos de estos no se utilizan (en este caso hay algunos null9.
+
+public interface IBuilder {
+	public void reset();
+	public void setBread(string bread);
+	public void setCheese(string cheese);
+	public void setMeat(string meat);
+	public void set Vegetables(string vegetables);
+	public void setCondiments(string condiments);
+}
+
+public class Sandwich {
+	public string bread;
+	public string cheese;
+	public string meat;
+	public string vegetables;
+	public string condiments;
+}
+
+public class SandwichBuilder : IBuilder {
+	private Sandwich sandwich;
+
+	public SandwichBuilder() {
+		reset();
+	}
+
+	public override void reset() {
+		sandwich = new Sandwich();
+	}
+
+	public override void setBread(string bread) {
+		sandwich.bread = bread;
+	}
+
+	public override void setCheese(string cheese) {
+		sandwich.cheese = cheese;
+	}
+
+	public override void setMeat(string meat) {
+		sandwich.meat = meat;
+	}
+
+	public override void setVegetables(string vegetables) {
+		sandwich.vegetables = vegetables;
+	}
+
+	public override void setCondiments(string condiments) {
+		sandwich.condiments = condiments;
+	}
+
+	public Sandwich getSandwich() {
+		return sandwich;
+	}
+}
+
+public class Director {
+	public void HamSandwich(IBuilder sandwichBuilder) {
+		sandwichBuilder.reset();
+		sandwichBuilder.setBread("white");
+		sandwichBuilder.setCheese("swiss");
+		sandwichBuilder.setMeat("ham");
+		sandwichBuilder.setVegetables("lettuce, tomato");
+		sandwichBuilder.setCondiments("mayo, mustard");
+	}
+
+	public void TurkeySandwich(IBuilder sandwichBuilder) {
+		sandwichBuilder.reset();
+		sandwichBuilder.setBread("wheat");
+		sandwichBuilder.setCheese("cheddar");
+		sandwichBuilder.setMeat("turkey");
+		sandwichBuilder.setVegetables("");
+		sandwichBuilder.setCondiments("mayo");
+	}
+}
+
+class Program {
+	static void Main(string[] args) {
+		Director director = new Director();
+		SandwichBuilder hamBuilder = new SandwichBuilder();
+		director.HamSandwich(hamBuilder);
+		Console.WriteLine(hamBuilder.getSandwich());
+
+		SandwichBuilder turkeyBuilder = new SandwichBuilder();
+		director.TurkeySandwich(turkeyBuilder);
+		Console.WriteLine(turkeyBuilder.getSandwich());
+	}
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 2
+Este problema se puede resolver utilizando el patrón prototype, ya que permite crear copias de objetos fácilmente sin tener que copiar cada atributo manualmente.
+
+public abstract class GameUnit {
+	public int Health { get; set; }
+	public int Attack { get; set; }
+	public int Defense { get; set; }
+
+	public virtual void LoadResources() {
+		Console.WriteLine("Loading resources...");
+	}
+
+	public virtual GameUnit Clone() {
+		GameUnit clone = new GameUnit();
+		clone.Health = this.Health;
+		clone.Attack = this.Attack;
+		clone.Defense = this.Defense;
+		return clone;
+	}
+}
+
+public class Archer : GameUnit {
+	public Archer() {
+		LoadResources();
+		Health = 100;
+		Attack = 15;
+		Defense = 5;
+	}
+}
+
+public class Knight : GameUnit {
+	public Knight() {
+		LoadResources();
+		Health = 200;
+		Attack = 20;
+		Defense = 10;
+	}
+}
+
+class Program {
+	static void Main(string[] args) {
+		Console.WriteLine("creating original Archer...");
+		Archer originalArcher = new Archer();
+
+		Console.WriteLine("copying archer...");
+		Archer copiedArcher1 = originalArcher.clone();
+		Archer copiedArcher2 = originalArcher.clone();
+
+		Console.WriteLine("creating original knight...");
+		Knight originalKnight = new Knight();
+		
+		Console.WriteLine("copying knight...");
+		Knight copiedKnight1 = originalKnight.clone();
+		Knight copiedKnight2 = originalKnight.clone();
+	}
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 3
+Este problema se puede resolver utilizando factory method, ya que permite la creación de distintos objetos y utilizarlos sin saber de antemano qué tipo de objeto se usará. En este ejemplo, el producto es un string, por lo que no es necesario crear una interfaz y clases concretas para cada producto. Por otra parte, la clase abstracta Servicio será implementada por subclases, que son las que se van a crear en tiempo de ejecución dependiendo de lo que se quiera.
+
+public abstract class Servicio {
+	public string mensaje;
+
+	public abstract void EnviarMensaje();
+}
+
+public class SMS : Servicio {
+	public string mensaje;
+
+	public override void EnviarMensaje() {
+		//lógica para enviar mensaje por sms
+	}
+}
+
+public class Email : Servicio {
+	public string mensaje;
+
+	public override void EnviarMensaje() {
+		//lógica para enviar mensaje por correo
+	}
+}
+
+public class Facebook : Servicio {
+	public string mensaje;
+
+	public override void EnviarMensaje() {
+		//lógica para enviar mensaje por facebook
+	}
+}
+
+public class MessagingApp {
+	Servicio servicio;
+	
+	public void SendMessage(string serviceType, string message) {
+		if (serviceType == "SMS") {
+			servicio = new SMS();
+			servicio.mensaje = message;
+			servicio.EnviarMensaje();
+		}		
+		else if (serviceType == "Email") {
+			servicio = new Email();
+			servicio.mensaje = message;
+			servicio.EnviarMensaje();
+		}
+		else {
+			servicio = new Facebook();
+			servicio.mensaje = message;
+			servicio.EnviarMensaje();
+		}
+	}
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 4
+Este problema se puede resolver utilizando prototype, dado que este patrón permite realizar copias de objetos sin tener que copiar todo manualmente.
+
+public class Book {
+	public string Title { get: set; }
+	public string Author { get; set; }
+	public List<string> BorrowedStudents { get; set; }
+	
+	public Book() {
+		//Simular la carga de recursos.
+		Console.WriteLine("acquiring a new book...");
+		BorrowedStudents = new List<string>();
+	}
+
+	public BorrowBook(string studentName) {
+		BorrowedStudents.Add(studentName);
+	}
+
+	public void PrintBorrowedStudents() {
+		Console.WriteLine($"Book: (Title), Borrowed by: (string.Join(",  ", BorrowedStudents))");
+	}
+
+	public Book Clone() {
+		Book clone = new Book();
+		clone.Title = this.Title;
+		clone.Author = this.Author;
+		foreach(string student in BorrowedStudents) {
+			clone.BorrowBook(student);
+		}
+		return clone;
+	}
+}
+
+class Program {
+	static void Main(string[] args) {
+		//Adquirir el libro original.
+		Book originalBook = new Book {
+			Title = "Harry Potter",
+			Author = "J. K. Rowling"
+		};
+
+		//Prestar el libro original a un estudiante.
+		originalBook.BorrowBook("Alice");
+
+		//Adquirir una copia adicional del mismo libro.
+		Book additionalCopy = originalBook.Clone();
+
+		//Prestar la copia adicional a otro estudiante
+		additionalCopy.BorrowBook("Bob");
+
+		//Imprimir los estudiantes a los que se les prestó cada copia del libro
+		originalBook.PrintBorrowedStudents();
+		additionalCopy.PrintBorrowedStudents();
+	}
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 5
+Este problema se puede resolver utilizando builder, ya que el constructor de TravelPlan es muy grande y no siempre se utilizan todos los parámetros. Con este patrón, se resuelve este problema porque se pueden crear variaciones de las instancias de una clase.
+
+public interface IBuilder {
+	public void reset();
+	public void setFlight(string flight);
+	public void setHotel(string hotel);
+	public void setCarRental(string carRental);
+	public void setActivities(string[] activities);
+	public void setRestaurantReservations(string[] restaurantReservations);
+}
+
+public class TravelPlan {
+	public string flight;
+	public string hotel;
+	public string carRental;
+	public string[] activities;
+	public string[] restaurantReservations;
+}
+
+public class TravelPlanBuilder : IBuilder {
+	private TravelPlan travelPlan;
+
+	public override void reset() {
+		travelPlan = new TravelPlan();
+	}
+
+	public override void setFlight(string flight) {
+		travelPlan.flight = flight;
+	}
+
+	public override void setHotel(string hotel) {
+		travelPlan.hotel = hotel;
+	}
+
+	public override void setCarRental(string carRental) {
+		travelPlan.carRental = carRental;
+	}
+
+	public override void setActivities(string[] activities) {
+		travelPlan.activities = activities;
+	}
+
+	public override void setRestaurantReservations(string[] restaurantReservations) {
+		travelPlan.restaurantReservations = restaurantReservations;
+	}
+
+	public TravelPlan getTravelPlan() {
+		return travelPlan;
+	}
+}
+
+public class Director {
+	public void TravelPlan1(IBuilder travelPlanBuilder) {
+		travelPlanBuilder.reset();
+		travelPlan.setFlight("flight 1");
+		travelPlan.setHotel("hotel 1);
+		travelPlan.setCarRental("");
+		travelPlan.setActivities(new string[] {"tour 1", "tour 2"});
+		travelPlan.setRestaurantReservations(new string[]());
+	}
+}
+
+class Program {
+	static void Main(string[] args) {
+		Director director = new Director();
+		IBuilder builder = new TravelPlanBuilder();
+		director.TravelPlan1(builder);
+		TravelPlan travelPlan = builder.getTravelPlan();
+	}
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 6
+Este problema se puede resolver utilizando singleton, ya que este patrón permite que un objeto sea accesible desde cualquier parte del código. Pareciera ser que ya está implementado en la clase ConfigurationManager.
+
+public class ConfigurationManager {
+	private static ConfigurationManager Instance;
+
+	private ConfigurationManager() {
+		
+	}
+	
+	public static ConfigurationManager getInstance() {
+		if (Instance == null) {
+			Instance = new ConfigurationManager();
+		}
+		return Instance;
+	}
+}
