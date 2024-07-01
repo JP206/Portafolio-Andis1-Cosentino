@@ -1,0 +1,734 @@
+Ejercicio 0 
+En el patrón chain of responsibility se aplican:
+	- SRP porque cada handler de la cadena tiene una única responsabilidad
+	- OCP porque los handlers están cerrados a la modificación, en caso de querer agregar algo se puede extender al sumar un handler a la cadena
+	- LSP porque los handlers son intercambiables entre sí, todos implementan una interfaz
+	- ISP porque los handlers implementan una interfaz entera y no hay métodos que no utilicen
+	- DIP porque los handlers dependen de una abstracción que es una interfaz
+
+================================================================================
+================================================================================
+
+Ejercicio 1
+Este problema puede ser resuelto con observer, dado que este patrón permite notificar a varios objetos acerca de eventos que ocurran sobre otro objeto en particular, mediante un mecanismo de suscripción.
+
+interface IListener {
+	public void Update(string name);
+}
+
+class Student : IListener {
+	public string Name { get; }
+
+	public Student(string name) {
+		Name = name;
+	}
+
+	public void Update(string name) {
+		Console.WriteLine($"{Name} hay un nuevo examen de {name});
+	}
+}
+
+class Exam {
+	private List<IListener> listeners;
+	public string Subject { get; }
+
+	public Exam(string subject) {
+		Subject = subject;
+	}
+
+	public void Subscribe(IListener listener) {
+		listeners.Add(listener);
+	}
+
+	public void Unsubscribe(IListener listener) {
+		listeners.Remove(listener);
+	}
+
+	public void Notify() {
+		foreach(IListener listener in listeners) {
+			listener.Update(Subject);
+		}
+	}	
+}
+
+class Program {
+	static void Main() {
+		Exam exam = new Exam("Matematicas");
+		IListener student1 = new Student("Alice");
+		IListener student2 = new Student("Bob");
+
+		exam.Subscribe(student1);
+		exam.Subscribe(student2);
+	}
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 2
+El patrón que puede resolver este problema es memento, ya que se utiliza para guardar los estados de objetos y restaurarlos.
+
+class Memento {
+	private string Name;
+	private int Health;
+	private int Mana;
+	
+	public Memento(string name, int health, int mana) {
+		Name = name;
+		Health = health;
+		Mana = mana;
+	}
+
+	public Restore(GameCharacter character) {
+		character. Name = Name;
+		character.Health = Health;
+		character.Mana = Mana;
+	}
+}
+
+class GameCharacter {
+	public string Name { get; set; }
+	public int Health { get; set: }
+	public int Mana { get; set; }
+
+	public void DisplayStatus() {
+		Console.WriteLine($"{Name} tiene {Health} de salud y {Mana} de mana");
+	}
+
+	public Memento CreateMemento() {
+		return new Memento(Name, Health, Mana);
+	}
+}
+
+class Program {
+	static void Main() {
+		GameCharacter gameCharacter = new GameCharacter {
+			Name = "John",
+			Health = 100,
+			Mana = 50
+		};
+
+		Console.WriteLine("Estado inicial:");
+		gameCharacter.DisplayStatus();
+
+		Console.WriteLine("\nGuardando estado...");
+		Memento savedState = gameCharacter.CreateMemento();
+
+		Console.WriteLine("\nCambiando estados");
+		gameCharacter.Health -= 30;
+		gameCharacter.Mana += 20;
+		gameCharacter.DisplayStatus();
+
+		Console.WriteLine("\nRestaurando estado...");
+		savedState.Restore(gameCharacter);
+		gameCharacter.DisplayStatus();
+	}
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 3
+Este problema se puede resolver con mediator, dado que este patrón limita las comunicaciones directas entre los objetos, haciendo que se comuniquen a través de un objeto mediador.
+
+abstract class IMediator {
+	User user1;
+	User user2;
+	
+	public void Notify(User sender, string message);
+}
+
+class Mediator extends IMediator {
+	public void SetUser1(User user) {
+		user1 = user;
+	}
+
+	public void SetUser2(User user) {
+		user2 = user;
+	}
+
+	public void Notify(User sender, string message) {
+		if (sender == user1) {
+			Console.WriteLine($"{sender.Name} to {user2.Name}: {message}");
+		}
+		else {
+			Console.WriteLine($"{sender.Name} to {user1.Name}: {message}");
+		}
+	}
+}
+
+class User {
+	public string Name { get; }
+	IMediator Mediator;	
+
+	public User(string name, IMediator mediator) {
+		Name = name;
+		Mediator = mediator;
+	}
+
+	public void SendMessage(string message) {
+		Mediator.Notify(this, message);
+	}
+}
+
+class Program {
+	IMediator mediator = new Mediator();
+	User alice = new User("Alice", mediator);
+	User bob = new User("Bob", mediator);
+
+	mediator.SetUser1(alice);
+	mediator.SetUser2(bob);
+
+	alice.SendMessage("Hola Bob!");
+	bob.SendMessage("Hola Alice!");
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 4
+El problema puede ser resuelto con el patrón command, ya que este patrón ayuda a encapsular la solicitud de una acción, para reducir el acoplamiento entre objetos. En este caso, en vez de llamar directamente los métodos de television, se pueden utilizar comandos.
+
+class Television {
+	private bool isOn = false;
+	private int volume = 10;
+
+	public void TurnOn() {
+		isOn = true;
+		Console.WriteLine("Televisión encendida");
+	}
+
+	public void TurnOff() {
+		isOn = false;
+		Console.WriteLine("Televisión apagada");
+	}
+
+	public void VolumeUp() {
+		if (isOn) {
+			volume++;
+			Console.WriteLine($"Volumen: {volumen}");
+		}
+	}
+
+	public void VolumeDown() {
+		if (isOn) {
+			volume--;
+			Console.WriteLine($"Volumen: {volumen}");
+		}
+	}
+}
+
+abstract class Command {
+	protected Television television;
+
+	public Command(Television television) {
+		this.television = television;
+	}
+
+	public abstract void Execute();
+}
+
+class TurnOnCommand extends Command {
+	public override void Execute() {
+		television.TurnOn();
+	}
+}
+
+class TurnOffCommand extends Command {
+	public override void Execute() {
+		television.TurnOff();
+	}
+}
+
+class VolumeUpCommand extends Command {
+	public override void Execute() {
+		television.VolumeUp();
+	}
+}
+
+class VolumeDownCommandoextends Command {
+	public override void Execute() {
+		television.VolumeDown();
+	}
+}
+
+class CommandHistory {
+	private Stack<Command> history;
+
+	public CommandHistory() {
+		histry = new Stack<Command>();
+	}
+
+	public void Push(Command command) {
+		history.push(command);
+	}
+
+	public void Pop() {
+		history.pop();
+	}
+}
+
+class Program {
+	void ExecuteCommand(Command command, CommandHistory history) {
+		command.Execute();
+		history.Push(command);
+	}
+
+	static void Main() {
+		Television television = new Television();
+		Command turnOn = new TurnOnCommand(television);
+		Command turnOff = new TurnOffCommand(television);
+		Command volumeUp = new VolumeUpCommand(television);
+		Command volumeDown = new VolumeDownCommand(television);
+		CommandHistory history = new CommandHistory();
+
+		string input = "";
+		while (input != "exit") {
+			Console.WriteLine("Escribe 'on' para encender, 'off' para apagar, 'volumeup' para subir volumen, 'volumedown' para bajar volumen, 'exit' para salir");
+			input = Console.ReadLine();
+			switch (input) {
+				case "on":
+					ExecuteCommand(turnOn, history);
+					break;
+				case "off":
+					ExecuteCommand(turnOff, history);
+					break;
+				case "volumeup":
+					ExecuteCommand(volumeUp, history);
+					break;
+				case "volumeDown":
+					ExecuteCommand(volumeDown, history);							break;
+			}	
+		}
+	}
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 5
+Este problema puede ser resuelto con visitor, dado que se puede separar la lógica de alimentar un animal de los objetos que la utilizan. En caso de querer agregar animales, se extiende la interfaz IVisitor con el nuevo animal, y se crea una nueva clase que implemente IAnimalFeed con este animal nuevo.
+
+interface IVisitor {
+	public void VisitLion();
+	public void VisitMonkey();
+	public void VisitElephant();
+}
+
+class Animal : IVisitor {
+	public void VisitLion() {
+		Console.WriteLine("El león está siendo alimentado con carne.");
+	}
+
+	public void VisitMonkey() {
+		Console.WriteLine("El mono está siendo alimentado con bananas.");
+	}
+
+	public void VisitElephant() {
+		Console.WriteLine("El elefante está siendo alimentado con pastito.");
+	}
+}
+
+interface IAnimalFeed {
+	public void accept(IVisitor visitor);
+}
+
+class LionFeed : IAnimalFeed {
+	public void accept(IVisitor visitor) {
+		visitor.VisitLion();	
+	}
+}
+
+class MonkeyFeed : IAnimalFeed {
+	public void accept(IVisitor visitor) {
+		visitor.VisitMonkey();
+	}
+}
+
+class ElephantFeed : IAnimalFeed {
+	public void accept(IVisitor visitor) {
+		visitor.VisitElephant();
+	}
+}
+
+class Program {
+	static void Main() {
+		IAnimalFeed[] animals = { new LionFeed(), MonkeyFeed(), ElephantFeed() };
+		IVisitor animal = new Animal();
+	
+		foreach(IAnimalFeed animalFeed in animals) {
+			animalFeed.accept(animal);
+		}
+	}
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 6
+Este problema puede ser resuelto utilizando state, dado que este patrón es útil en casos donde un objeto cambia su comportamiento cuando cambia su estado.
+
+abstract class State {
+	protected TrafficLight trafficLight;
+
+	public State(TrafficLight trafficLight) {
+		this.trafficLight = trafficLight;
+	}
+
+	public abstract void ChangeToRedLight();
+	
+	public abstract void ChangeToYellowLight();
+
+	public abstract void ChangeToGreenLight();
+}
+
+public class RedLight extends State {
+	public override void ChangeToRedLight() {
+		Console.WriteLine("Luz ya es roja");		
+	}
+
+	public override void ChangeToYellowLight() {
+		trafficLight.ChangeState(new YellowLight());
+		Console.WriteLine("Cambio a amarillo");
+	}
+
+	public override void ChangeToGreenLight() {
+		trafficLight.ChangeState(new GreenLight());
+		Console.WriteLine("Cambio a verde");
+	}
+}
+
+public class YellowLight extends State() {
+	public override void ChangeToRedLight() {
+		trafficLight.ChangeState(new RedLight());
+		Console.WriteLine("Cambio a rojo");
+	}
+
+	public override void ChangeToYellowLight() {
+		Console.WriteLine("Luz ya es amarilla");
+	}
+
+	public override void ChangeToGreenLight() {
+		trafficLight.ChangeState(new GreenLight());
+		Console.WriteLine("Cambio a verde");
+	}
+}
+
+public class GreenLight extends State {
+	public override void ChangeToRedLight() {
+		trafficLight.ChangeState(new RedLight());
+		Console.WrieLine("Cambio a rojo");
+	}
+
+	public override void ChangeToYellowLight() {
+		trafficLight.ChangeState(new YellowLight());
+		Console.WriteLine("Cambio a amarillo");
+	}
+
+	public override void ChangeToGreenLight() {
+		Console.WriteLine("Luz ya es verde");
+	}
+}
+
+class TrafficLight {
+	public State state;
+
+	public TrafficLight() {
+		state = new RedLightState();
+		Console.WriteLine("Luz inicial es roja");
+	}
+
+	public void ChangeState(State state) {
+		this.state = state;
+	}
+
+	public void ChangeLight() {
+		if (typeof(state) == RedLightState) {
+			state.ChangeToGreenLight();
+		}
+		
+		if (typeof(state) == YellowLightState) {
+			state.ChangeToRedLight();
+		}
+
+		if (typeof(state) == GreenLightState) {
+			state.ChangeToYellowLight();
+		}
+	}
+}
+
+class Program {
+	static void Main() {
+		TrafficLight trafficLight = new TrafficLight();
+
+		for (int i = 0; i < 5; i++) {
+			trafficLight.ChangeLight();
+			Thread.Sleep(1000);
+		}
+	}
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 7
+Este problema puede ser solucionado utilizando chain of responsibility, dado que primero se ejecuta un condicional para decidir qué lógica efectuar. Con este patrón, se automatiza el proceso condicional y el handler adecuado de la cadena ejecuta la lógica.
+
+abstract class Handler {
+	private Handler nextHandler;
+
+	public void setNext(Handler handler) {
+		nextHandler = handler;
+	}
+
+	public abstract double handle(string courier, double weight);
+}
+
+class Ups extends Handler {
+	public override double handle(string courier, double weight) {
+		if (courier == "UPS") {
+			return weight * 0.75;
+		}
+		else {
+			return nextHandler.handle(courier, weight);
+		}
+	}
+}
+
+class Fedex extends Handler {
+	public override double handle(string courier, double weight) {
+		if (courier == "FedEx) {
+			return weight * 0.85;
+		}
+		else {
+			return nextHandler.handle(courier, weight);
+		}
+	}
+}
+
+class Dac extends Handler {
+	public override double handle(string courier, double weight) {
+		if (courier == "DAC") {
+			return weight * 0.65;
+		}
+		else {
+			return nextHandler.handle(courier, weight);
+		}
+	}
+}
+
+class CourierNoSoportado extends Handler {
+	public override double handle(string courier, double weight) {
+		throw new Exception("courier no soportado");
+	}
+}
+
+class Program {
+	static void Main() {
+		Handler ups = new Ups();
+		Handler fedex = new Fedex();
+		Handler dac = new Dac();
+		Handler noSoportado = new CourierNoSoportado();
+
+		ups.setNext(fedex);
+		fedex.setNext(dac);
+		dac.setNext(noSoportado);
+
+		Console.WriteLine("Costo de envío con UPS: " + ups.handle("UPS", 5));
+		Console.WriteLine("Costo de envío con FedEx: " + ups.handle("FedEx", 5));
+		Console.WriteLine("Costo de envío con DAC: " + ups.handle("DAC", 5));
+	}
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 8
+Para resolver este problema se puede utilizar strategy, dado que en EmailService se elige un algoritmo para ejecutar. Con este patrón, en vez de tener toda la lógica dentro de EmailService, cada algoritmo está en clases separadas y la clase EmailService elige cuál utilizar.
+
+interface IStrategy {
+	public void Send(string recipient, string subject, string message);
+}
+
+class Email : IStrategy {
+	public void Send(string recipient, string subject, string message) {
+		Console.WriteLine($"Enviando correo a {recipient} con el asunto '{subject}': {message}");
+		//lógica para enviar correo
+	}
+}
+
+class Newsletter : IStrategy {
+	public void Send(string recipient, string subject, string message) {
+		Console.WriteLine($"Enviando newsletter a {recipient} con el asunto '{subject}': {message}");
+		//lógica para enviar newsletter
+	}
+}
+
+class Context {
+	private Strategy strategy;
+
+	public void SetStrategy(Strategy newStrategy) {
+		strategy = newStrategy;
+	}
+
+	public void ExecuteStrategy(string recipient, string subject, string message) {
+		strategy.Send(recipient, subject, message);
+	}
+}
+
+class Program {
+	static void Main() {
+		Context context = new Context();
+		context.SetStrategy(new Email());
+		context.ExecuteStrategy("john.doe@example.com", "Nueva promoción",
+"¡Revisa nuestra nueva promoción!");
+
+		context.SetStrategy(new Newsletter());
+		context.ExecuteStrategy("john.doe@example.com", "Newsletter de 
+Junio", "Aquí está nuestro newsletter de Junio.");
+	}
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 9
+Este problema se puede resolver utilizando chain of responsibility, ya que este patrón permite automatizar un condicional y encapsular la lógica que se ejecuta en cada caso.
+
+abstract class Handler {
+	private Handler next;
+	
+	public void SetNext(Handler nextHandler) {
+		next = nextHandler;
+	}
+
+	public abstract void Handle(int level, string message);
+}
+
+class Level1Handler extends Handler {
+	public override void Handle(int level, string message) {
+		if (level == 1) {
+			Console.WriteLine("Soporte de nivel 1: manejando consulta " + message);
+		}
+		else {
+			next.Handle(level, message);
+		}
+	}
+}
+
+class Level2Handler extends Handler {
+	public override void Handle(int level, string message) {
+		if (level == 2) {
+			Console.WriteLine("Soporte de nivel 2: manejando consulta " + message);
+		}
+		else {
+			next.Handle(level, message);
+		}
+	}
+}
+
+class Level3Handler extends Handler {
+	public override void Handle(int level, string message) {
+		if (level == 3) {
+			Console.WriteLine("Soporte de nivel 3: manejando consulta " + message);
+		}
+		else {
+			next.Handle(level, message);
+		}
+	}
+}
+
+class ConsultaNoSoportadaHandler extends Handler {
+	public override void Handle(int level, string message) {
+		Console.WriteLine("Consulta no soportada");
+	}
+}
+
+class Program {
+	static void Main() {
+		Handler level1 = new Level1Handler();
+		Handler level2 = new Level2Handler();
+		Handler level3 = new Level3Handler();
+		Handler noSoportada = new ConsultaNoSoportadaHandler();
+
+		level1.SetNext(level2);
+		level2.SetNext(level3);
+		level3.SetNext(noSoportada);
+
+		level1.Handle(1, "No puedo iniciar sesión");
+		level1.Handle(2, "Mi cuenta ha sido bloqueada");
+		level1.Handle(3, "Necesito recuperar datos borrados");
+	}
+}
+
+================================================================================
+================================================================================
+
+Ejercicio 10
+Este ejercicio puede ser resuelto con chain of responsibility porque con este patrón se elimina la necesidad de realizar un condicional y realizar un comportamiento en base a la condición.
+
+abstract class Handler {
+	Handler next;
+
+	public void SetNext(Handler next) {
+		this.next = next;
+	}
+
+	public abstract void Handle(string nationality, string name);
+}
+
+class Usa extends Handler {
+	public override void Handle(string nationality, string name) {
+		if (nationality == "USA") {
+			Console.WriteLine($"Hello, {name}");
+		}
+		else {
+			next.Handle(nationality, name);
+		}
+	}
+}
+
+class Spain extends Handler {
+	public override void Handle(string nationality, string name) {
+		if (nationality == "Spain") {
+			Console.WriteLine($"Hola, {name}");
+		}
+		else {
+			next.Handle(nationality, name);
+		}
+	}
+}
+
+class Japan extends Handler {
+	public override void Handle(string nationality, string name) {
+		if (nationality == "Japan") {
+			Console.WriteLine($"こんにちは, {name}");
+		}
+		else {
+			next.Handle(nationality, name);
+		}
+	}
+}
+
+class NotSupported extends Handler {
+	public override void Handle(string nationality, string name) {
+		Console.WriteLine("Nationality not supported");
+	}
+}
+
+class Program {
+	static void Main() {
+		Handler usa = new Usa();
+		Handler spain = new Spain();
+		Handler japan = new Japan();
+		Handler notSupported = new NotSupported();
+
+		usa.SetNext(spain);
+		spain.SetNext(japan);
+		japan.SetNext(notSupported);
+
+		usa.Handle("USA", "John");
+		usa.Handle("Spain", "Juan");
+		usa.Handle("Japan", "Yuki");	
+	}
+}
