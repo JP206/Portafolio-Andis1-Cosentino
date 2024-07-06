@@ -103,10 +103,10 @@ public class SafePayService {
 	}
 }
 
-public class SafePayServiceAdapter extends QuickPayService {
+public class SafePayServiceAdapter extends QuickPayService{
 	QuickPayService quickPayService;
 
-	public bool UseSafePayService(string fromAccount, string toAccount, string currencyType, double amount) {
+	public void Transact(string fromAccount, string toAccount, string currencyType, double amount) {
 		quickPayService.MakePayment(amount, currencyType);	
 	}
 }

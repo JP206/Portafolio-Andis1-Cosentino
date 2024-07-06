@@ -297,7 +297,8 @@ class Program {
 					ExecuteCommand(volumeUp, history);
 					break;
 				case "volumeDown":
-					ExecuteCommand(volumeDown, history);							break;
+					ExecuteCommand(volumeDown, history);							
+					break;
 			}	
 		}
 	}
@@ -353,10 +354,10 @@ class ElephantFeed : IAnimalFeed {
 
 class Program {
 	static void Main() {
-		IAnimalFeed[] animals = { new LionFeed(), MonkeyFeed(), ElephantFeed() };
+		IAnimalFeed[] animalsFeed = { new LionFeed(), MonkeyFeed(), ElephantFeed() };
 		IVisitor animal = new Animal();
 	
-		foreach(IAnimalFeed animalFeed in animals) {
+		foreach(IAnimalFeed animalFeed in animalsFeed) {
 			animalFeed.accept(animal);
 		}
 	}
@@ -443,15 +444,15 @@ class TrafficLight {
 	}
 
 	public void ChangeLight() {
-		if (typeof(state) == RedLightState) {
+		if (typeof(state) == RedLight) {
 			state.ChangeToGreenLight();
 		}
 		
-		if (typeof(state) == YellowLightState) {
+		else if (typeof(state) == YellowLight) {
 			state.ChangeToRedLight();
 		}
 
-		if (typeof(state) == GreenLightState) {
+		else if (typeof(state) == GreenLight) {
 			state.ChangeToYellowLight();
 		}
 	}
@@ -565,7 +566,7 @@ class Newsletter : IStrategy {
 }
 
 class Context {
-	private Strategy strategy;
+	private IStrategy strategy;
 
 	public void SetStrategy(Strategy newStrategy) {
 		strategy = newStrategy;
